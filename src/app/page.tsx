@@ -157,10 +157,10 @@ export default function Home() {
       <WhereWeAreSection />
 
       {/* Why Ara Health Section  */}
-      <WhyAraHealthSection />
+      {/* <WhyAraHealthSection /> */}
 
       {/* Mission Section */}
-      <section className="py-20 bg-gradient-to-br from-ara-navy via-ara-blue-dark to-ara-navy text-white">
+      {/* <section className="py-20 bg-gradient-to-br from-ara-navy via-ara-blue-dark to-ara-navy text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-inter font-bold mb-6">
             Our Mission
@@ -170,7 +170,7 @@ export default function Home() {
             effective healthcare system that prioritizes patient well-being.
           </p>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20">
@@ -283,7 +283,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-ara-navy text-white py-12">
+      {/* <footer className="bg-ara-navy text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-6">
@@ -307,10 +307,10 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </footer>
+      </footer> */}
 
       {/* Video Dialog */}
-      <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+      {/* <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
         <DialogContent className="max-w-4xl">
           <DialogHeader>
             <DialogTitle>Founder Video</DialogTitle>
@@ -327,10 +327,10 @@ export default function Home() {
             </div>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
 
       {/* Contact Dialog */}
-      <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
+      {/* <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Contact Ara Health</DialogTitle>
@@ -341,10 +341,10 @@ export default function Home() {
           </DialogHeader>
           <ContactForm />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
 
       {/* Survey Dialog */}
-      <Dialog open={isSurveyOpen} onOpenChange={setIsSurveyOpen}>
+      {/* <Dialog open={isSurveyOpen} onOpenChange={setIsSurveyOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Help Us Improve</DialogTitle>
@@ -355,7 +355,7 @@ export default function Home() {
           </DialogHeader>
           <SurveyForm />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }
