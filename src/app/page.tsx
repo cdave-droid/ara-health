@@ -28,6 +28,8 @@ import VerticalGlassyConnector from "@/components/VerticalGlassyConnector";
 import TiltedCard from "@/components/TiltedCard";
 import { HeroSection } from "@/components/hero-section";
 import ProblemSection from "@/components/problem-section";
+import SolutionSection from "@/components/solution-section";
+import TeamSection from "@/components/team-section";
 
 import {
   Heart,
@@ -51,7 +53,7 @@ export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isSurveyOpen, setIsSurveyOpen] = useState(false);
 
-  // Card Stack Animation Effect
+  // Card Stack Animation Effect - FIXED VERSION
   useEffect(() => {
     const cards = [
       document.querySelector('[data-card="1"]'),
@@ -60,9 +62,20 @@ export default function Home() {
       document.querySelector('[data-card="4"]'),
     ];
 
+    // Set initial state for all cards
+    cards.forEach((card, index) => {
+      if (card) {
+        gsap.set(card, {
+          opacity: 0,
+          scale: 0.9,
+          y: 30,
+        });
+      }
+    });
+
     const observerOptions = {
-      threshold: [0, 0.25, 0.5, 0.75, 1],
-      rootMargin: "-10% 0px -10% 0px",
+      threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      rootMargin: "-15% 0px -15% 0px",
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -71,36 +84,37 @@ export default function Home() {
           parseInt(entry.target.getAttribute("data-card") || "1") - 1;
         const progress = entry.intersectionRatio;
 
-        if (progress > 0.1) {
-          // Show current card
+        if (progress > 0.4) {
+          // Show current card - NO Y MOVEMENT, just opacity and scale
           gsap.to(entry.target, {
             opacity: 1,
             scale: 1,
             y: 0,
-            duration: 0.8,
+            duration: 1.5,
             ease: "power2.out",
+            delay: 0.3,
           });
 
-          // Stack previous cards
+          // Stack previous cards - FIXED POSITIONS
           for (let i = 0; i < cardIndex; i++) {
             const prevCard = cards[i];
             if (prevCard) {
               gsap.to(prevCard, {
-                y: -20 - i * 10,
-                scale: 0.95 - i * 0.05,
-                opacity: 0.8 - i * 0.2,
-                duration: 0.6,
+                scale: 0.92 - i * 0.02,
+                opacity: 0.85 - i * 0.15,
+                duration: 1.2,
                 ease: "power2.out",
+                delay: 0.2 * (i + 1),
               });
             }
           }
-        } else {
-          // Hide cards that are out of view
+        } else if (progress < 0.2) {
+          // Reset card when out of view
           gsap.to(entry.target, {
             opacity: 0,
-            scale: 0.95,
-            y: 20,
-            duration: 0.4,
+            scale: 0.9,
+            y: 30,
+            duration: 0.6,
             ease: "power2.in",
           });
         }
@@ -131,181 +145,12 @@ export default function Home() {
       {/* The Problem Section  */}
       <ProblemSection />
 
-      {/* Our Solution Section */}
-      <section id="solution" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
-              Our Solution
-            </h2>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-              Ara Health provides a comprehensive AI platform that automates and
-              aligns complex and scattered patient data systems.
-            </p>
-          </div>
+      {/* The Solution Section  */}
+      <SolutionSection />
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4 p-6 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-ara-blue/10 hover:to-ara-blue/20 hover:shadow-lg hover:scale-[1.02] border border-transparent hover:border-ara-blue/40 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-blue-600 relative z-10">
-                  <Smartphone className="h-6 w-6 text-white" />
-                </div>
-                <div className="relative z-10">
-                  <h3 className="text-xl font-inter font-semibold text-ara-navy mb-2">
-                    Patient & Family App
-                  </h3>
-                  <p className="text-gray-600">
-                    Securely capture advance-care choices, medical decisions,
-                    chronic condition treatment plans, and update medical
-                    documents.
-                  </p>
-                </div>
-              </div>
+      {/* The Team Section  */}
+      <TeamSection />
 
-              <div className="flex items-start space-x-4 p-6 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-teal-50/80 hover:to-teal-100/60 hover:shadow-lg hover:scale-[1.02] border border-transparent hover:border-teal-300/40 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-400/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-blue-600 relative z-10">
-                  <Zap className="h-6 w-6 text-white" />
-                </div>
-                <div className="relative z-10">
-                  <h3 className="text-xl font-inter font-semibold text-ara-navy mb-2">
-                    One-Click SMART-on-FHIR
-                  </h3>
-                  <p className="text-gray-600">
-                    Embedded view for any clinician who opens the patient&apos;s
-                    chart—no matter which EHR the clinic or hospital uses.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4 p-6 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-amber-50/80 hover:to-amber-100/60 hover:shadow-lg hover:scale-[1.02] border border-transparent hover:border-amber-300/40 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-blue-600 relative z-10">
-                  <Shield className="h-6 w-6 text-white" />
-                </div>
-                <div className="relative z-10">
-                  <h3 className="text-xl font-inter font-semibold text-ara-navy mb-2">
-                    No More Guessing
-                  </h3>
-                  <p className="text-gray-600">
-                    No more calling outpatient clinics for information, digging
-                    through scanned PDFs, or guessing at patient&apos;s wishes.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <Card className="p-8 bg-white border-0 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:bg-gradient-to-br hover:from-white hover:to-blue-50/60 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <CardHeader>
-                  <CardTitle className="text-ara-navy text-2xl">
-                    Ara Health Platform
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4 relative z-10">
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-gray-700">
-                      Patient-specific AI models
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-gray-700">
-                      Integrated patient data systems
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-gray-700">Dual-sided app access</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-gray-700">
-                      Real-time value alignment monitoring
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Meet the Team Section */}
-      <section id="team" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
-              Meet the Team
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-4">
-              <a
-                href="https://linkedin.com/in/chintandave"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block transition-transform hover:scale-[1.02] duration-300"
-              >
-                <div className="h-[650px] w-full">
-                  <TiltedCard
-                    imageSrc="/dr.jpg"
-                    altText="Dr. Chintan Dave - Founder and CEO"
-                    captionText="Dr. Chintan Dave"
-                    containerHeight="650px"
-                    containerWidth="100%"
-                    imageHeight="650px"
-                    imageWidth="100%"
-                    rotateAmplitude={12}
-                    scaleOnHover={1.05}
-                    showMobileWarning={false}
-                    showTooltip={true}
-                    displayOverlayContent={false}
-                  />
-                </div>
-              </a>
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-ara-navy mb-2">
-                  Dr. Chintan Dave
-                </h3>
-                <p className="text-lg text-gray-600">Founder and CEO</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Click the photo to connect on LinkedIn
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="h-[650px] w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors duration-300">
-                <div className="text-center">
-                  <div className="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="h-12 w-12 text-gray-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                    Chief Technical Officer
-                  </h3>
-                  <p className="text-gray-500">Photo coming soon</p>
-                </div>
-              </div>
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-ara-navy mb-2">
-                  Chief Technical Officer
-                </h3>
-                <p className="text-lg text-gray-600">Undisclosed for now</p>
-                <p className="text-gray-600 mt-2">
-                  Ex-Scale AI senior engineer with extensive experience in
-                  building scalable AI systems and enterprise-grade healthcare
-                  solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       {/* Where We Are Today Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -490,6 +335,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why Ara Health Section */}
       {/* Why Ara Health Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
