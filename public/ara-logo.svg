@@ -1,0 +1,80 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with radial gradient -->
+  <defs>
+    <radialGradient id="bgGradient" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#0A1F3D" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0A1F3D" stop-opacity="1"/>
+    </radialGradient>
+    
+    <!-- Gradient for the A shape -->
+    <linearGradient id="ribbonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E5BFF"/>
+      <stop offset="50%" stop-color="#18A0A0"/>
+      <stop offset="100%" stop-color="#1E5BFF"/>
+    </linearGradient>
+    
+    <!-- Highlight gradient -->
+    <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.3"/>
+    </linearGradient>
+    
+    <!-- Shadow gradient -->
+    <linearGradient id="shadowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1F3D" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0A1F3D" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="60" cy="60" r="58" fill="url(#bgGradient)" stroke="#1E5BFF" stroke-width="2"/>
+  
+  <!-- Left ribbon of the A -->
+  <path d="M 25 85 Q 35 60 45 45 Q 55 35 60 30 Q 65 35 75 45 Q 85 60 95 85" 
+        stroke="url(#ribbonGradient)" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        fill="none"/>
+  
+  <!-- Right ribbon of the A -->
+  <path d="M 95 85 Q 85 60 75 45 Q 65 35 60 30 Q 55 35 45 45 Q 35 60 25 85" 
+        stroke="url(#ribbonGradient)" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        fill="none"/>
+  
+  <!-- Central fold/loop of the A -->
+  <ellipse cx="60" cy="30" rx="12" ry="6" 
+           fill="url(#highlightGradient)" 
+           stroke="url(#ribbonGradient)" 
+           stroke-width="2"/>
+  
+  <!-- Highlight on the central fold -->
+  <ellipse cx="58" cy="28" rx="8" ry="3" fill="#FFFFFF" opacity="0.8"/>
+  
+  <!-- Additional highlights on the ribbons -->
+  <path d="M 30 80 Q 40 55 50 40" 
+        stroke="#FFFFFF" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        opacity="0.6"/>
+  
+  <path d="M 90 80 Q 80 55 70 40" 
+        stroke="#FFFFFF" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        opacity="0.6"/>
+  
+  <!-- Shadow effects -->
+  <path d="M 25 85 Q 35 60 45 45" 
+        stroke="url(#shadowGradient)" 
+        stroke-width="10" 
+        stroke-linecap="round" 
+        opacity="0.3"/>
+  
+  <path d="M 95 85 Q 85 60 75 45" 
+        stroke="url(#shadowGradient)" 
+        stroke-width="10" 
+        stroke-linecap="round" 
+        opacity="0.3"/>
+</svg> 
