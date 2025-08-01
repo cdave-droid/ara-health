@@ -1,0 +1,134 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, Play } from "lucide-react";
+import Orb from "./orb";
+
+interface HeroSectionProps {
+  onVideoOpen: () => void;
+}
+
+export function HeroSection({ onVideoOpen }: HeroSectionProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  // Transform values for scroll animations
+  const orbOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const textY = useTransform(scrollY, [0, 300], [0, -100]);
+  const textOpacity = useTransform(scrollY, [0, 200], [1, 0.8]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <section
+      id="home"
+      className="relative overflow-hidden h-screen flex items-center"
+    >
+      {/* Orb Background */}
+      <motion.div
+        className="absolute inset-0 w-full h-screen select-none pointer-events-none"
+        style={{ opacity: orbOpacity }}
+      >
+        <Orb
+          hoverIntensity={1}
+          rotateOnHover={true}
+          hue={0}
+          forceHoverState={false}
+        />
+      </motion.div>
+
+      {/* Hover Detection Layer - Only in empty areas */}
+      <div
+        className="absolute inset-0 w-full h-screen"
+        id="orb-hover-layer"
+        style={{ pointerEvents: "auto" }}
+      ></div>
+
+      {/* Hero Content */}
+      <motion.div
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none"
+        style={{
+          y: textY,
+          opacity: textOpacity,
+        }}
+      >
+        <div className="text-center">
+          <motion.h1
+            className="text-4xl md:text-6xl lg:text-7xl font-inter font-bold text-ara-navy mb-6 leading-tight pointer-events-auto"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            Solving Values Misalignment in{" "}
+            <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">
+              Healthcare
+            </span>
+          </motion.h1>
+
+          <motion.p
+            className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-10 leading-relaxed pointer-events-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            We&apos;re building the only patient-first AI platform dedicated
+            towards improving patient experience and outcomes by ensuring
+            alignment with patient values across the healthcare ecosystem.
+          </motion.p>
+
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          >
+            <button className="relative flex items-center px-8 py-4 overflow-hidden font-medium transition-all bg-ara-blue rounded-lg group text-lg shadow-lg">
+              <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-ara-blue-dark rounded group-hover:-mr-4 group-hover:-mt-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+              </span>
+              <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-ara-blue-dark rounded group-hover:-ml-4 group-hover:-mb-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+              </span>
+              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-ara-blue-dark rounded-lg group-hover:translate-x-0"></span>
+              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white flex items-center">
+                Join the early-access list
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </span>
+            </button>
+
+            <button
+              onClick={onVideoOpen}
+              className="relative flex items-center px-8 py-4 overflow-hidden font-medium transition-all bg-transparent border-2 border-ara-blue/30 rounded-lg group text-lg backdrop-blur-sm"
+            >
+              <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-ara-blue/20 rounded group-hover:-mr-4 group-hover:-mt-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-ara-blue"></span>
+              </span>
+              <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-ara-blue/20 rounded group-hover:-ml-4 group-hover:-mb-4">
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-ara-blue"></span>
+              </span>
+              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-ara-blue/10 rounded-lg group-hover:translate-x-0"></span>
+              <span className="relative w-full text-left text-ara-blue transition-colors duration-200 ease-in-out group-hover:text-ara-blue flex items-center">
+                <Play className="mr-2 h-5 w-5" />
+                Watch Founder Video
+              </span>
+            </button>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Enhanced Floating elements with backdrop blur - Fixed Background */}
+      <div className="fixed top-20 left-10 w-20 h-20 bg-ara-blue/10 rounded-full blur-xl"></div>
+      <div className="fixed bottom-20 right-10 w-32 h-32 bg-ara-teal/10 rounded-full blur-xl"></div>
+      <div className="fixed top-40 right-20 w-16 h-16 bg-ara-blue-light/15 rounded-full blur-lg"></div>
+    </section>
+  );
+}

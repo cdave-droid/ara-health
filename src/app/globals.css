@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -18,65 +18,70 @@
   }
 }
 
-
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    /* Ara Health Color Palette */
+    --ara-midnight-navy: 210 100% 12%; /* #0A1F3D */
+    --ara-sapphire-blue: 220 100% 56%; /* #1E5BFF */
+    --ara-seafoam-teal: 180 73% 35%; /* #18A0A0 */
+    --ara-warm-gold: 45 100% 71%; /* #FFCB6B */
+    --ara-cloud-white: 0 0% 100%; /* #FFFFFF */
+
+    /* System colors using Ara Health palette */
+    --background: var(--ara-cloud-white);
+    --foreground: var(--ara-midnight-navy);
+    --card: var(--ara-cloud-white);
+    --card-foreground: var(--ara-midnight-navy);
+    --popover: var(--ara-cloud-white);
+    --popover-foreground: var(--ara-midnight-navy);
+    --primary: var(--ara-sapphire-blue);
+    --primary-foreground: var(--ara-cloud-white);
+    --secondary: 210 100% 98%; /* Very light navy */
+    --secondary-foreground: var(--ara-midnight-navy);
+    --muted: 210 100% 96%; /* Light navy */
+    --muted-foreground: 210 100% 40%; /* Medium navy */
+    --accent: var(--ara-seafoam-teal);
+    --accent-foreground: var(--ara-cloud-white);
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --destructive-foreground: var(--ara-cloud-white);
+    --border: 210 100% 90%; /* Light navy border */
+    --input: 210 100% 90%; /* Light navy input */
+    --ring: var(--ara-sapphire-blue);
+    --chart-1: var(--ara-sapphire-blue);
+    --chart-2: var(--ara-seafoam-teal);
+    --chart-3: var(--ara-midnight-navy);
+    --chart-4: var(--ara-warm-gold);
+    --chart-5: 180 73% 45%; /* Lighter teal */
     --radius: 0.5rem;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: var(--ara-midnight-navy);
+    --foreground: var(--ara-cloud-white);
+    --card: 210 100% 15%; /* Slightly lighter navy */
+    --card-foreground: var(--ara-cloud-white);
+    --popover: 210 100% 15%; /* Slightly lighter navy */
+    --popover-foreground: var(--ara-cloud-white);
+    --primary: var(--ara-sapphire-blue);
+    --primary-foreground: var(--ara-cloud-white);
+    --secondary: 210 100% 20%; /* Medium navy */
+    --secondary-foreground: var(--ara-cloud-white);
+    --muted: 210 100% 20%; /* Medium navy */
+    --muted-foreground: 210 100% 70%; /* Light navy text */
+    --accent: var(--ara-seafoam-teal);
+    --accent-foreground: var(--ara-cloud-white);
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --destructive-foreground: var(--ara-cloud-white);
+    --border: 210 100% 25%; /* Medium navy border */
+    --input: 210 100% 25%; /* Medium navy input */
+    --ring: var(--ara-sapphire-blue);
+    --chart-1: var(--ara-sapphire-blue);
+    --chart-2: var(--ara-seafoam-teal);
+    --chart-3: var(--ara-warm-gold);
+    --chart-4: 180 73% 45%; /* Lighter teal */
+    --chart-5: 220 100% 70%; /* Lighter blue */
   }
 }
-
-
 
 @layer base {
   * {
@@ -85,7 +90,12 @@
   body {
     @apply bg-background text-foreground font-source-sans;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-inter;
   }
 }

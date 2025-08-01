@@ -260,7 +260,7 @@ export default function Orb({
       container.addEventListener("mousemove", handleMouseMove);
       container.addEventListener("mouseleave", handleMouseLeave);
     }
-    
+
     // Also listen to the hero section for better coverage
     const heroSection = document.getElementById("home");
     if (heroSection) {
@@ -278,7 +278,8 @@ export default function Orb({
       program.uniforms.hoverIntensity.value = hoverIntensity;
 
       const effectiveHover = forceHoverState ? 1 : targetHover;
-      program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
+      program.uniforms.hover.value +=
+        (effectiveHover - program.uniforms.hover.value) * 0.1;
 
       if (rotateOnHover && effectiveHover > 0.5) {
         currentRot += dt * rotationSpeed;
@@ -292,7 +293,7 @@ export default function Orb({
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", resize);
-      
+
       // Clean up event listeners from the hover layer
       const hoverLayer = document.getElementById("orb-hover-layer");
       if (hoverLayer) {
@@ -302,18 +303,28 @@ export default function Orb({
         container.removeEventListener("mousemove", handleMouseMove);
         container.removeEventListener("mouseleave", handleMouseLeave);
       }
-      
+
       // Clean up hero section listeners
       const heroSection = document.getElementById("home");
       if (heroSection) {
         heroSection.removeEventListener("mousemove", handleMouseMove);
         heroSection.removeEventListener("mouseleave", handleMouseLeave);
       }
-      
+
       container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, [hue, hoverIntensity, rotateOnHover, forceHoverState]);
 
-  return <div ref={ctnDom} className="w-full h-full select-none" style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none' }} />;
+  return (
+    <div
+      ref={ctnDom}
+      className="w-full h-full select-none"
+      style={{
+        userSelect: "none",
+        WebkitUserSelect: "none",
+        MozUserSelect: "none",
+      }}
+    />
+  );
 }
