@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { gsap } from 'gsap'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
@@ -12,6 +13,8 @@ import { Navbar } from '@/components/navbar'
 import Orb from '@/components/orb'
 import GlassyConnector from "@/components/GlassyConnector";
 import VerticalGlassyConnector from "@/components/VerticalGlassyConnector";
+import TiltedCard from '@/components/TiltedCard'
+
 import { 
   Heart, 
   Shield, 
@@ -33,8 +36,77 @@ export default function Home() {
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [isSurveyOpen, setIsSurveyOpen] = useState(false)
 
+  // Card Stack Animation Effect
+  useEffect(() => {
+    const cards = [
+      document.querySelector('[data-card="1"]'),
+      document.querySelector('[data-card="2"]'),
+      document.querySelector('[data-card="3"]'),
+      document.querySelector('[data-card="4"]'),
+    ];
+
+    const observerOptions = {
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+      rootMargin: '-10% 0px -10% 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const cardIndex = parseInt(entry.target.getAttribute('data-card') || '1') - 1;
+        const progress = entry.intersectionRatio;
+        
+        if (progress > 0.1) {
+          // Show current card
+          gsap.to(entry.target, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out"
+          });
+
+          // Stack previous cards
+          for (let i = 0; i < cardIndex; i++) {
+            const prevCard = cards[i];
+            if (prevCard) {
+              gsap.to(prevCard, {
+                y: -20 - (i * 10),
+                scale: 0.95 - (i * 0.05),
+                opacity: 0.8 - (i * 0.2),
+                duration: 0.6,
+                ease: "power2.out"
+              });
+            }
+          }
+        } else {
+          // Hide cards that are out of view
+          gsap.to(entry.target, {
+            opacity: 0,
+            scale: 0.95,
+            y: 20,
+            duration: 0.4,
+            ease: "power2.in"
+          });
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach(card => {
+      if (card) observer.observe(card);
+    });
+
+    return () => {
+      cards.forEach(card => {
+        if (card) observer.unobserve(card);
+      });
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-ara-blue-light/10 to-ara-teal-light/10">
+    <div className="min-h-screen">
+      {/* Fixed Background Gradient */}
+      <div className="fixed inset-0 bg-gradient-to-br from-white via-ara-blue-light/10 to-ara-teal-light/10 -z-10"></div>
+      
       {/* Navigation */}
       <Navbar />
 
@@ -114,8 +186,8 @@ export default function Home() {
         <div className="absolute top-40 right-20 w-16 h-16 bg-ara-blue-light/15 rounded-full blur-lg"></div>
       </section>
 
-      {/* The Problem Section */}
-      <section id="problem" className="py-20 bg-white">
+      {/* The Problem Section - Card Stack Animation */}
+      <section id="problem" className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
@@ -127,82 +199,105 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Problem Cards Row */}
-          <div className="relative flex flex-col md:flex-row gap-8 mb-12 w-full">
-            <GlassyConnector />
-            {/* Problem 1: Code Blue Dilemma */}
-            <div className="flex-1 min-w-0">
-              <div className="relative group bg-gradient-to-br from-white via-red-50 to-red-100/60 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-transparent hover:border-red-200">
-                <div className="absolute inset-0 bg-red-100/30 group-hover:bg-red-200/40 rounded-2xl pointer-events-none transition-colors duration-300 z-0" />
-                <div className="relative flex flex-col items-start gap-4 z-10">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-red-100 to-red-300 shadow-md">
-                    <Heart className="h-8 w-8 text-red-500 drop-shadow-md" />
+          {/* Card Stack Container */}
+          <div className="relative h-[800px] flex items-center justify-center">
+            {/* Problem Card 1 - The Problem */}
+            <div data-card="1" className="absolute w-full max-w-2xl transform transition-all duration-1000 ease-out">
+              <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 hover:shadow-3xl transition-all duration-500 animate-pulse">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-ara-blue to-ara-blue-dark rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <Heart className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-red-700 mb-1 tracking-tight font-inter">Code Blue Dilemma</h3>
-                  <p className="text-gray-700 leading-relaxed font-medium text-base">
-                    When a code blue (cardiac arrest) is called, clinicians have seconds to decide whether to resuscitate or not. Today, a legally signed advanced directive often sits in a filing cabinet or lost in a patient-portal PDF.
+                  <h3 className="text-2xl font-bold text-ara-navy mb-4">The Problem</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Patient values and medical preferences are not captured effectively and often lost amongst the 
+                    complexities and various siloes within the healthcare system.
                   </p>
                 </div>
               </div>
             </div>
-            {/* Problem 2: Lost Documents */}
-            <div className="flex-1 min-w-0 relative flex flex-col items-center">
-              <div className="relative group bg-gradient-to-br from-white via-orange-50 to-orange-100/60 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-transparent hover:border-orange-200">
-                <div className="absolute inset-0 bg-orange-100/30 group-hover:bg-orange-200/40 rounded-2xl pointer-events-none transition-colors duration-300 z-0" />
-                <div className="relative flex flex-col items-start gap-4 z-10">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-orange-100 to-orange-300 shadow-md">
-                    <FileText className="h-8 w-8 text-orange-500 drop-shadow-md" />
+
+            {/* Problem Card 2 - Code Blue Dilemma */}
+            <div data-card="2" className="absolute w-full max-w-2xl transform transition-all duration-1000 ease-out opacity-0 scale-95 translate-y-20">
+              <div className="bg-gradient-to-br from-white via-red-50 to-red-100/60 rounded-3xl p-8 shadow-2xl border border-red-200 hover:shadow-3xl transition-all duration-500 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-red-100/30 rounded-full blur-xl animate-pulse"></div>
+                <div className="text-center relative z-10">
+                  <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse">
+                    <Heart className="h-8 w-8 text-white animate-pulse" />
                   </div>
-                  <h3 className="text-xl font-bold text-orange-600 mb-1 tracking-tight font-inter">Lost Documents</h3>
-                  <p className="text-gray-700 leading-relaxed font-medium text-base">
-                    Do-Not-Resuscitate (DNR) forms often sit in filing cabinets, family inboxes, or lost in patient-portal PDFs that nobody can find at the bedside.
+                  <h3 className="text-2xl font-bold text-red-700 mb-4">Code Blue Dilemma</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    When a code blue (cardiac arrest) is called, clinicians have seconds to decide whether to resuscitate or not. 
+                    Today, a legally signed advanced directive often sits in a filing cabinet or lost in a patient-portal PDF.
                   </p>
                 </div>
               </div>
-              <VerticalGlassyConnector />
             </div>
-            {/* Problem 3: High Costs */}
-            <div className="flex-1 min-w-0">
-              <div className="relative group bg-gradient-to-br from-white via-purple-50 to-purple-100/60 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-transparent hover:border-purple-200">
-                <div className="absolute inset-0 bg-purple-100/30 group-hover:bg-purple-200/40 rounded-2xl pointer-events-none transition-colors duration-300 z-0" />
-                <div className="relative flex flex-col items-start gap-4 z-10">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-purple-100 to-purple-300 shadow-md">
-                    <Zap className="h-8 w-8 text-purple-500 drop-shadow-md" />
+
+            {/* Problem Card 3 - Lost Documents */}
+            <div data-card="3" className="absolute w-full max-w-2xl transform transition-all duration-1000 ease-out opacity-0 scale-95 translate-y-20">
+              <div className="bg-gradient-to-br from-white via-orange-50 to-orange-100/60 rounded-3xl p-8 shadow-2xl border border-orange-200 hover:shadow-3xl transition-all duration-500 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-16 h-16 bg-orange-100/30 rounded-full blur-lg animate-bounce"></div>
+                <div className="text-center relative z-10">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <FileText className="h-8 w-8 text-white animate-bounce" />
                   </div>
-                  <h3 className="text-xl font-bold text-purple-700 mb-1 tracking-tight font-inter">High Costs</h3>
-                  <p className="text-gray-700 leading-relaxed font-medium text-base">
-                    Each unnecessary resuscitation costs the system $30-50,000 per patient. Patients die without dignity and without respect towards their autonomous prior medical decisions.
+                  <h3 className="text-2xl font-bold text-orange-600 mb-4">Lost Documents</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    DNR forms often sit in filing cabinets, family inboxes, or lost in patient-portal PDFs that nobody can find at the bedside.
                   </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Problem Card 4 - High Costs */}
+            <div data-card="4" className="absolute w-full max-w-2xl transform transition-all duration-1000 ease-out opacity-0 scale-95 translate-y-20">
+              <div className="bg-gradient-to-br from-white via-purple-50 to-purple-100/60 rounded-3xl p-8 shadow-2xl border border-purple-200 hover:shadow-3xl transition-all duration-500 relative overflow-hidden">
+                <div className="absolute bottom-0 right-0 w-24 h-24 bg-purple-100/30 rounded-full blur-xl animate-pulse"></div>
+                <div className="text-center relative z-10">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <Zap className="h-8 w-8 text-white animate-pulse" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-purple-700 mb-4">High Costs</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Each unnecessary resuscitation costs the system $30-50,000 per patient. Patients die without dignity 
+                    and without respect towards their autonomous prior medical decisions.
+                  </p>
+                  <div className="mt-4 text-sm text-purple-600 font-semibold animate-pulse">
+                    💰 $30,000 - $50,000 per patient
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* Current Reality Box Full Width */}
-          <div className="w-full mt-32">
-            <Card className="relative bg-gradient-to-br from-white via-orange-50 to-red-50 border-0 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden p-10">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-100/30 via-orange-100/20 to-orange-200/30 rounded-2xl pointer-events-none z-0" />
+
+          {/* Current Reality Box - Appears after all cards */}
+          <div className="w-full mt-32 transform hover:scale-[1.02] transition-all duration-500">
+            <Card className="relative bg-gradient-to-br from-white via-orange-50 to-red-50 border-0 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden p-12 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-100/30 via-orange-100/20 to-orange-200/30 rounded-3xl pointer-events-none z-0" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-50/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
               <CardHeader className="relative z-10">
-                <CardTitle className="text-ara-navy text-2xl font-inter font-bold flex items-center gap-3">
-                  <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                <CardTitle className="text-ara-navy text-3xl font-inter font-bold flex items-center gap-4 group-hover:text-red-800 transition-colors duration-300">
+                  <div className="w-5 h-5 bg-red-500 rounded-full shadow-lg animate-pulse"></div>
                   Current Reality
                 </CardTitle>
               </CardHeader>
-              <CardContent className="relative z-10 space-y-4 mt-4">
-                <div className="flex items-center space-x-3 p-4 bg-white/70 rounded-xl shadow-sm">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span className="text-gray-800 font-semibold text-lg">Patient preferences lost in siloes</span>
+              <CardContent className="relative z-10 space-y-6 mt-6">
+                <div className="flex items-center space-x-4 p-6 bg-white/80 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="w-4 h-4 bg-red-500 rounded-full shadow-md"></div>
+                  <span className="text-gray-800 font-semibold text-xl">Patient preferences lost in siloes</span>
                 </div>
-                <div className="flex items-center space-x-3 p-4 bg-white/70 rounded-xl shadow-sm">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span className="text-gray-800 font-semibold text-lg">Critical decisions made without context</span>
+                <div className="flex items-center space-x-4 p-6 bg-white/80 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="w-4 h-4 bg-red-500 rounded-full shadow-md"></div>
+                  <span className="text-gray-800 font-semibold text-xl">Critical decisions made without context</span>
                 </div>
-                <div className="flex items-center space-x-3 p-4 bg-white/70 rounded-xl shadow-sm">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span className="text-gray-800 font-semibold text-lg">Families suffer emotional trauma</span>
+                <div className="flex items-center space-x-4 p-6 bg-white/80 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="w-4 h-4 bg-red-500 rounded-full shadow-md"></div>
+                  <span className="text-gray-800 font-semibold text-xl">Families suffer emotional trauma</span>
                 </div>
-                <div className="flex items-center space-x-3 p-4 bg-white/70 rounded-xl shadow-sm">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span className="text-gray-800 font-semibold text-lg">System costs skyrocket</span>
+                <div className="flex items-center space-x-4 p-6 bg-white/80 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="w-4 h-4 bg-red-500 rounded-full shadow-md"></div>
+                  <span className="text-gray-800 font-semibold text-xl">System costs skyrocket</span>
                 </div>
               </CardContent>
             </Card>
@@ -211,7 +306,7 @@ export default function Home() {
       </section>
 
       {/* Our Solution Section */}
-      <section id="solution" className="py-20 bg-gradient-to-br from-ara-blue-light/5 to-ara-teal-light/10">
+      <section id="solution" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
@@ -224,11 +319,12 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-ara-blue/10 rounded-full flex items-center justify-center">
+              <div className="flex items-start space-x-4 p-6 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50/80 hover:to-blue-100/60 hover:shadow-lg hover:scale-[1.02] border border-transparent hover:border-blue-300/40 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="flex-shrink-0 w-12 h-12 bg-ara-blue/10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-ara-blue/20 relative z-10">
                   <Smartphone className="h-6 w-6 text-ara-blue" />
                 </div>
-                <div>
+                <div className="relative z-10">
                   <h3 className="text-xl font-inter font-semibold text-ara-navy mb-2">
                     Patient & Family App
                   </h3>
@@ -239,11 +335,12 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-ara-teal/10 rounded-full flex items-center justify-center">
+              <div className="flex items-start space-x-4 p-6 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-teal-50/80 hover:to-teal-100/60 hover:shadow-lg hover:scale-[1.02] border border-transparent hover:border-teal-300/40 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-400/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="flex-shrink-0 w-12 h-12 bg-ara-teal/10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-ara-teal/20 relative z-10">
                   <Zap className="h-6 w-6 text-ara-teal" />
                 </div>
-                <div>
+                <div className="relative z-10">
                   <h3 className="text-xl font-inter font-semibold text-ara-navy mb-2">
                     One-Click SMART-on-FHIR
                   </h3>
@@ -254,11 +351,12 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-ara-gold/10 rounded-full flex items-center justify-center">
+              <div className="flex items-start space-x-4 p-6 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-amber-50/80 hover:to-amber-100/60 hover:shadow-lg hover:scale-[1.02] border border-transparent hover:border-amber-300/40 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 to-amber-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="flex-shrink-0 w-12 h-12 bg-ara-gold/10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-ara-gold/20 relative z-10">
                   <Shield className="h-6 w-6 text-ara-gold" />
                 </div>
-                <div>
+                <div className="relative z-10">
                   <h3 className="text-xl font-inter font-semibold text-ara-navy mb-2">
                     No More Guessing
                   </h3>
@@ -271,11 +369,12 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <Card className="p-8 bg-white border-0 shadow-xl">
+              <Card className="p-8 bg-white border-0 shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:bg-gradient-to-br hover:from-white hover:to-blue-50/60 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <CardHeader>
                   <CardTitle className="text-ara-navy text-2xl">Ara Health Platform</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 relative z-10">
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-green-500" />
                     <span className="text-gray-700">Patient-specific AI models</span>
@@ -300,7 +399,7 @@ export default function Home() {
       </section>
 
       {/* Meet the Team Section */}
-      <section id="team" className="py-20 bg-white">
+      <section id="team" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
@@ -309,62 +408,62 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <Card className="p-8 border-0 shadow-lg bg-gradient-to-br from-blue-50 to-teal-50">
-              <CardHeader>
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-ara-blue rounded-full flex items-center justify-center">
-                    <Users className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-ara-navy text-2xl">Dr. Chintan Dave</CardTitle>
-                    <CardDescription className="text-lg">Founder and CEO</CardDescription>
-                  </div>
+            <div className="space-y-4">
+              <a 
+                href="https://linkedin.com/in/chintandave" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block transition-transform hover:scale-[1.02] duration-300"
+              >
+                <div className="h-[650px] w-full">
+                  <TiltedCard
+                    imageSrc="/dr.jpg"
+                    altText="Dr. Chintan Dave - Founder and CEO"
+                    captionText="Dr. Chintan Dave"
+                    containerHeight="650px"
+                    containerWidth="100%"
+                    imageHeight="650px"
+                    imageWidth="100%"
+                    rotateAmplitude={12}
+                    scaleOnHover={1.05}
+                    showMobileWarning={false}
+                    showTooltip={true}
+                    displayOverlayContent={false}
+                  />
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-gray-600">
-                  Dual-board certified in Internal Medicine and Critical Care Medicine, with expertise in medical research 
-                  (cited {'>'}475 times), AI (previous startup and research experience), and medical education with over 
-                  {'>'}85,000 followers across social media.
-                </p>
-                <p className="text-gray-600">
-                  <strong>Values:</strong> Integrity, compassion, and growth. Committed to building Ara Health based on 
-                  what is best for the patient.
-                </p>
-                <Button variant="outline" className="w-full" asChild>
-                  <a href="https://linkedin.com/in/chintandave" target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="mr-2 h-4 w-4" />
-                    Connect on LinkedIn
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
+              </a>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-ara-navy mb-2">Dr. Chintan Dave</h3>
+                <p className="text-lg text-gray-600">Founder and CEO</p>
+                <p className="text-sm text-gray-500 mt-2">Click the photo to connect on LinkedIn</p>
+              </div>
+            </div>
 
-            <Card className="p-8 border-0 shadow-lg bg-gradient-to-br from-gray-50 to-slate-50">
-              <CardHeader>
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center">
-                    <Users className="h-8 w-8 text-white" />
+            <div className="space-y-4">
+              <div className="h-[650px] w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors duration-300">
+                <div className="text-center">
+                  <div className="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="h-12 w-12 text-gray-600" />
                   </div>
-                  <div>
-                    <CardTitle className="text-ara-navy text-2xl">Chief Technical Officer</CardTitle>
-                    <CardDescription className="text-lg">Undisclosed for now</CardDescription>
-                  </div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-2">Chief Technical Officer</h3>
+                  <p className="text-gray-500">Photo coming soon</p>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
+              </div>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-ara-navy mb-2">Chief Technical Officer</h3>
+                <p className="text-lg text-gray-600">Undisclosed for now</p>
+                <p className="text-gray-600 mt-2">
                   Ex-Scale AI senior engineer with extensive experience in building scalable AI systems and 
                   enterprise-grade healthcare solutions.
                 </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Where We Are Today Section */}
-      <section className="py-20 bg-gradient-to-br from-ara-teal-light/5 to-ara-blue-light/10">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
@@ -372,56 +471,163 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-6 border-0 shadow-lg bg-white">
-              <CardHeader>
-                <div className="w-12 h-12 bg-ara-blue/10 rounded-full flex items-center justify-center mb-4">
-                  <Smartphone className="h-6 w-6 text-ara-blue" />
+          {/* Interactive Timeline Component */}
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-ara-blue via-ara-teal to-ara-gold rounded-full"></div>
+            
+            {/* Timeline Items */}
+            <div className="space-y-12">
+              {/* Item 1 - Early Prototypes */}
+              <div className="relative group">
+                <div className="flex items-center justify-center md:justify-start md:pr-8">
+                  <div className="relative z-10">
+                    {/* Timeline Dot */}
+                    <div className="w-8 h-8 bg-ara-blue rounded-full border-4 border-white shadow-lg group-hover:scale-125 transition-transform duration-300 relative">
+                      <div className="absolute inset-0 bg-ara-blue rounded-full animate-ping opacity-20"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Content Card */}
+                  <div className="ml-8 md:ml-12 flex-1">
+                    <Card className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-ara-blue to-ara-blue-dark rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                            <Smartphone className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold text-ara-navy mb-2 group-hover:text-ara-blue transition-colors duration-300">
+                              Early Prototypes
+                            </h3>
+                            <p className="text-gray-600 leading-relaxed">
+                              Early prototypes and testing of the mobile app are in progress. We're iterating on user experience 
+                              and core functionality to ensure seamless integration with existing healthcare workflows.
+                            </p>
+                            <div className="mt-4 flex items-center space-x-2">
+                              <div className="w-2 h-2 bg-ara-blue rounded-full animate-pulse"></div>
+                              <span className="text-sm text-ara-blue font-medium">In Development</span>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
-                <CardTitle className="text-ara-navy">Early Prototypes</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Early prototypes and testing of the mobile app are in progress.
-                </p>
-              </CardContent>
-            </Card>
+              </div>
 
-            <Card className="p-6 border-0 shadow-lg bg-white">
-              <CardHeader>
-                <div className="w-12 h-12 bg-ara-teal/10 rounded-full flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 text-ara-teal" />
+              {/* Item 2 - Exclusive Network */}
+              <div className="relative group">
+                <div className="flex items-center justify-center md:justify-end md:pl-8">
+                  <div className="relative z-10 order-2 md:order-1">
+                    {/* Timeline Dot */}
+                    <div className="w-8 h-8 bg-ara-teal rounded-full border-4 border-white shadow-lg group-hover:scale-125 transition-transform duration-300 relative">
+                      <div className="absolute inset-0 bg-ara-teal rounded-full animate-ping opacity-20"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Content Card */}
+                  <div className="mr-8 md:mr-12 flex-1 order-1 md:order-2">
+                    <Card className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-ara-teal to-ara-teal-dark rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                            <Users className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold text-ara-navy mb-2 group-hover:text-ara-teal transition-colors duration-300">
+                              Exclusive Network
+                            </h3>
+                            <p className="text-gray-600 leading-relaxed">
+                              Building an exclusive network of clinics, hospital systems, patients, and estate-planning attorneys 
+                              to refine workflows and medicolegal requirements for seamless integration.
+                            </p>
+                            <div className="mt-4 flex items-center space-x-2">
+                              <div className="w-2 h-2 bg-ara-teal rounded-full animate-pulse"></div>
+                              <span className="text-sm text-ara-teal font-medium">Active Partnerships</span>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
-                <CardTitle className="text-ara-navy">Exclusive Network</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Exclusive network of clinics, hospital systems, patients, and estate-planning attorneys to 
-                  refine workflows and medicolegal requirements.
-                </p>
-              </CardContent>
-            </Card>
+              </div>
 
-            <Card className="p-6 border-0 shadow-lg bg-white">
-              <CardHeader>
-                <div className="w-12 h-12 bg-ara-gold/10 rounded-full flex items-center justify-center mb-4">
-                  <Heart className="h-6 w-6 text-ara-gold" />
+              {/* Item 3 - Design Partners */}
+              <div className="relative group">
+                <div className="flex items-center justify-center md:justify-start md:pr-8">
+                  <div className="relative z-10">
+                    {/* Timeline Dot */}
+                    <div className="w-8 h-8 bg-ara-gold rounded-full border-4 border-white shadow-lg group-hover:scale-125 transition-transform duration-300 relative">
+                      <div className="absolute inset-0 bg-ara-gold rounded-full animate-ping opacity-20"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Content Card */}
+                  <div className="ml-8 md:ml-12 flex-1">
+                    <Card className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-ara-gold to-ara-gold-dark rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                            <Heart className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold text-ara-navy mb-2 group-hover:text-ara-gold transition-colors duration-300">
+                              Design Partners
+                            </h3>
+                            <p className="text-gray-600 leading-relaxed">
+                              Looking for design-partner hospitals, long-term-care organisations, and patient advocates 
+                              who want to shape the product from day one and help us build the future of healthcare.
+                            </p>
+                            <div className="mt-4 flex items-center space-x-2">
+                              <div className="w-2 h-2 bg-ara-gold rounded-full animate-pulse"></div>
+                              <span className="text-sm text-ara-gold font-medium">Seeking Partners</span>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
-                <CardTitle className="text-ara-navy">Design Partners</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  Looking for design-partner hospitals, long-term-care organisations, and patient advocates 
-                  who want to shape the product from day one.
-                </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
+
+            {/* Floating Progress Indicator */}
+            <div className="absolute top-0 right-0 md:right-8 transform translate-y-4">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-gray-200">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-ara-navy mb-1">25%</div>
+                  <div className="text-sm text-gray-600">Complete</div>
+                  <div className="w-24 h-2 bg-gray-200 rounded-full mt-2 overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-ara-blue via-ara-teal to-ara-gold rounded-full animate-pulse" style={{ width: '25%' }}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-ara-blue/10 to-ara-teal/10 rounded-full px-6 py-3 border border-ara-blue/20">
+              <div className="w-2 h-2 bg-ara-blue rounded-full animate-pulse"></div>
+              <span className="text-ara-navy font-medium">Ready to join our journey?</span>
+            </div>
+            <div className="mt-4">
+              <Button 
+                className="bg-gradient-to-r from-ara-blue to-ara-teal hover:from-ara-blue-dark hover:to-ara-teal-dark text-white shadow-lg"
+                onClick={() => setIsContactOpen(true)}
+              >
+                <Mail className="mr-2 h-4 w-4" />
+                Get Involved
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Why Ara Health Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
@@ -503,7 +709,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
