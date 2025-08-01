@@ -306,7 +306,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Where We Are Today Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -406,8 +405,7 @@ export default function Home() {
                     </Card>
                   </div>
                 </div>
-              </Card>
-            </div>
+              </div>
 
               {/* Item 3 - Design Partners */}
               <div className="relative group">
@@ -591,8 +589,9 @@ export default function Home() {
               Let&apos;s Build a New Medical System Together
             </h2>
             <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              We're creating a healthcare ecosystem where patient values are at the center of every decision. 
-              Join us in transforming how care is delivered, experienced, and improved.
+              We&apos;re creating a healthcare ecosystem where patient values
+              are at the center of every decision. Join us in transforming how
+              care is delivered, experienced, and improved.
             </p>
           </div>
 
@@ -630,7 +629,9 @@ export default function Home() {
                 <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
                   <Heart className="h-10 w-10 text-white" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-ara-navy mb-4">Clinician?</CardTitle>
+                <CardTitle className="text-2xl font-bold text-ara-navy mb-4">
+                  Clinician?
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
@@ -638,8 +639,8 @@ export default function Home() {
                   delivery.
                 </p>
                 <div className="mt-auto">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="w-full border-2 border-ara-teal text-ara-teal hover:bg-ara-teal hover:text-white font-semibold py-3 h-12 text-base transition-all duration-300"
                   >
                     <Users className="mr-2 h-5 w-5" />
