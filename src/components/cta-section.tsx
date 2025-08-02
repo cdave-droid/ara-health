@@ -174,16 +174,23 @@ export default function CTASection() {
 
         {/* Main Contact Button */}
         <motion.div
-          className="text-center"
+          className="text-center mt-16 md:mt-24"
           style={{ opacity: cardsOpacity, y: cardsY }}
         >
           <Button
-            size="lg"
-            className="bg-gradient-to-r from-ara-blue via-ara-blue-dark to-ara-blue hover:from-ara-blue-dark hover:via-ara-blue hover:to-ara-blue text-white px-12 md:px-16 py-6 md:py-8 text-2xl md:text-3xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-500 rounded-3xl border-4 border-white/20 hover:border-white/30"
+            className="relative flex items-center px-12 sm:px-16 md:px-20 py-6 sm:py-8 md:py-10 overflow-hidden font-medium transition-all bg-ara-blue rounded-xl group text-2xl sm:text-3xl md:text-4xl shadow-2xl hover:shadow-3xl w-full sm:w-auto max-w-2xl mx-auto"
             onClick={() => setIsContactOpen(true)}
           >
-            <Mail className="mr-6 h-8 w-8 md:h-10 md:w-10" />
-            Contact Us
+            <span className="absolute top-0 right-0 inline-block w-6 h-6 transition-all duration-500 ease-in-out bg-ara-blue-dark rounded group-hover:-mr-6 group-hover:-mt-6">
+              <span className="absolute top-0 right-0 w-7 h-7 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+            </span>
+            <span className="absolute bottom-0 rotate-180 left-0 inline-block w-6 h-6 transition-all duration-500 ease-in-out bg-ara-blue-dark rounded group-hover:-ml-6 group-hover:-mb-6">
+              <span className="absolute top-0 right-0 w-7 h-7 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+            </span>
+            <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-ara-blue-dark rounded-xl group-hover:translate-x-0"></span>
+            <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white flex items-center justify-center">
+              Contact Us
+            </span>
           </Button>
         </motion.div>
       </div>
