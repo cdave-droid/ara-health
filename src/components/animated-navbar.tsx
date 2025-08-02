@@ -8,13 +8,16 @@ import { Menu, X } from "lucide-react";
 interface NavLink {
   href: string;
   label: string;
+  sectionId?: string;
 }
 
 const navLinks: NavLink[] = [
-  { href: "/", label: "Home" },
-  { href: "/", label: "Problem" },
-  { href: "/", label: "Solution" },
-  { href: "/", label: "Contact" },
+  { href: "#home", label: "Home", sectionId: "home" },
+  { href: "#problem", label: "Problem", sectionId: "problem" },
+  { href: "#solution", label: "Solution", sectionId: "solution" },
+  { href: "#team", label: "Team", sectionId: "team" },
+  { href: "#mission", label: "Mission", sectionId: "mission" },
+  { href: "#contact", label: "Contact", sectionId: "contact" },
 ];
 
 export function AnimatedNavbar() {
@@ -30,6 +33,19 @@ export function AnimatedNavbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <motion.nav
@@ -61,9 +77,10 @@ export function AnimatedNavbar() {
         >
           {/* Logo and Brand */}
           <motion.div
-            className="flex items-center space-x-3"
+            className="flex items-center space-x-3 cursor-pointer"
             layout
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            onClick={scrollToTop}
           >
             <Image
               src="/logo.png"
@@ -92,9 +109,13 @@ export function AnimatedNavbar() {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
                 {navLinks.map((link) => (
-                  <motion.a
+                  <motion.button
                     key={link.href}
-                    href={link.href}
+                    onClick={() =>
+                      scrollToSection(
+                        link.sectionId || link.href.replace("#", "")
+                      )
+                    }
                     className="text-white/90 hover:text-white font-inter font-medium transition-colors duration-200 relative group whitespace-nowrap"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -106,7 +127,7 @@ export function AnimatedNavbar() {
                       whileHover={{ scaleX: 1 }}
                       transition={{ duration: 0.2 }}
                     />
-                  </motion.a>
+                  </motion.button>
                 ))}
               </motion.div>
             )}
@@ -164,15 +185,18 @@ export function AnimatedNavbar() {
             >
               <div className="px-6 py-4 space-y-4">
                 {navLinks.map((link) => (
-                  <motion.a
+                  <motion.button
                     key={link.href}
-                    href={link.href}
-                    className="block text-white/90 hover:text-white font-inter font-medium transition-colors duration-200 py-2 border-b border-white/10 last:border-b-0"
+                    onClick={() =>
+                      scrollToSection(
+                        link.sectionId || link.href.replace("#", "")
+                      )
+                    }
+                    className="block text-white/90 hover:text-white font-inter font-medium transition-colors duration-200 py-2 border-b border-white/10 last:border-b-0 w-full text-left"
                     whileHover={{ x: 10 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
-                  </motion.a>
+                  </motion.button>
                 ))}
               </div>
             </motion.div>
