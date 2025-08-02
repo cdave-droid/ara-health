@@ -73,7 +73,7 @@ export function HeroSection({}: HeroSectionProps) {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <Image
-              src="/logo.png"
+              src="/animated_logo.gif"
               alt="Ara Health Logo"
               width={96}
               height={96}
@@ -122,27 +122,12 @@ export function HeroSection({}: HeroSectionProps) {
               </span>
               <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-ara-blue-dark rounded-lg group-hover:translate-x-0"></span>
               <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white flex items-center justify-center sm:justify-start">
-                Join the early-access list
+                Join the Waitlist
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </span>
             </button>
 
-            <button
-              className="relative flex items-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden font-medium transition-all bg-white text-ara-navy rounded-lg group text-base sm:text-lg shadow-lg w-full sm:w-auto hover:bg-gray-50"
-              onClick={() => setIsWaitlistOpen(true)}
-            >
-              <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-gray-200 rounded group-hover:-mr-4 group-hover:-mt-4">
-                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-gray-200 rounded group-hover:-ml-4 group-hover:-mb-4">
-                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-              </span>
-              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-gray-100 rounded-lg group-hover:translate-x-0"></span>
-              <span className="relative w-full text-left text-ara-navy transition-colors duration-200 ease-in-out group-hover:text-ara-navy flex items-center justify-center sm:justify-start">
-                Join Waitlist
-                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-              </span>
-            </button>
+
           </motion.div>
         </div>
       </motion.div>

@@ -57,67 +57,29 @@ export default function SolutionSection() {
 
         {/* Solution Points - Fade in one by one */}
         <div className="space-y-6 md:space-y-8">
-          {/* Point 1 - Patient & Family App */}
+          {/* Point 1 - Real-Time Value Alignment */}
           <motion.div
             className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6 md:p-8 rounded-2xl bg-white border border-ara-blue shadow-lg hover:shadow-xl transition-all duration-300"
             style={{ opacity: point1Opacity, y: point1Y }}
           >
             <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
-              <Smartphone className="h-6 w-6 md:h-8 md:w-8 text-white" />
+              <CheckCircle className="h-6 w-6 md:h-8 md:w-8 text-white" />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
-                Patient & Family App
+                Real-Time Value Alignment
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-                Securely capture advance-care choices, medical decisions,
-                chronic condition treatment plans, and update medical documents.
+                Continuous monitoring and alignment of patient values with care
+                decisions, ensuring dignity and respect in every medical choice.
               </p>
             </div>
           </motion.div>
 
-          {/* Point 2 - One-Click SMART-on-FHIR */}
+          {/* Point 2 - Patient-Specific AI Models */}
           <motion.div
             className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6 md:p-8 rounded-2xl bg-white border border-ara-blue shadow-lg hover:shadow-xl transition-all duration-300"
             style={{ opacity: point2Opacity, y: point2Y }}
-          >
-            <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
-              <Zap className="h-6 w-6 md:h-8 md:w-8 text-white" />
-            </div>
-            <div className="flex-1 text-center sm:text-left">
-              <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
-                One-Click SMART-on-FHIR
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-                Embedded view for any clinician who opens the patient&apos;s
-                chart—no matter which EHR the clinic or hospital uses.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Point 3 - No More Guessing */}
-          <motion.div
-            className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6 md:p-8 rounded-2xl bg-white border border-ara-blue shadow-lg hover:shadow-xl transition-all duration-300"
-            style={{ opacity: point3Opacity, y: point3Y }}
-          >
-            <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
-              <Shield className="h-6 w-6 md:h-8 md:w-8 text-white" />
-            </div>
-            <div className="flex-1 text-center sm:text-left">
-              <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
-                No More Guessing
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-                No more calling outpatient clinics for information, digging
-                through scanned PDFs, or guessing at patient&apos;s wishes.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Point 4 - Patient-Specific AI Models */}
-          <motion.div
-            className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6 md:p-8 rounded-2xl bg-white border border-ara-blue shadow-lg hover:shadow-xl transition-all duration-300"
-            style={{ opacity: point4Opacity, y: point4Y }}
           >
             <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
               <Users className="h-6 w-6 md:h-8 md:w-8 text-white" />
@@ -134,21 +96,59 @@ export default function SolutionSection() {
             </div>
           </motion.div>
 
-          {/* Point 5 - Real-Time Value Alignment */}
+          {/* Point 3 - Patient & Family App */}
+          <motion.div
+            className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6 md:p-8 rounded-2xl bg-white border border-ara-blue shadow-lg hover:shadow-xl transition-all duration-300"
+            style={{ opacity: point3Opacity, y: point3Y }}
+          >
+            <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
+              <Smartphone className="h-6 w-6 md:h-8 md:w-8 text-white" />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
+                Patient & Family App
+              </h3>
+              <p className="text-gray-700 leading-relaxed text-base md:text-lg">
+                Securely capture advance-care choices, medical decisions,
+                chronic condition treatment plans, and update medical documents.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Point 4 - One-Click SMART-on-FHIR */}
+          <motion.div
+            className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6 md:p-8 rounded-2xl bg-white border border-ara-blue shadow-lg hover:shadow-xl transition-all duration-300"
+            style={{ opacity: point4Opacity, y: point4Y }}
+          >
+            <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
+              <Zap className="h-6 w-6 md:h-8 md:w-8 text-white" />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
+                One-Click SMART-on-FHIR
+              </h3>
+              <p className="text-gray-700 leading-relaxed text-base md:text-lg">
+                Embedded view for any clinician who opens the patient&apos;s
+                chart—no matter which EHR the clinic or hospital uses.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Point 5 - No More Guessing */}
           <motion.div
             className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6 md:p-8 rounded-2xl bg-white border border-ara-blue shadow-lg hover:shadow-xl transition-all duration-300"
             style={{ opacity: point5Opacity, y: point5Y }}
           >
             <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0">
-              <CheckCircle className="h-6 w-6 md:h-8 md:w-8 text-white" />
+              <Shield className="h-6 w-6 md:h-8 md:w-8 text-white" />
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
-                Real-Time Value Alignment
+                No More Guessing
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-                Continuous monitoring and alignment of patient values with care
-                decisions, ensuring dignity and respect in every medical choice.
+                No more calling outpatient clinics for information, digging
+                through scanned PDFs, or guessing at patient&apos;s wishes.
               </p>
             </div>
           </motion.div>

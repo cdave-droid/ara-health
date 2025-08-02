@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Heart, Shield, Users, Target, ArrowRight } from "lucide-react";
+import { Heart, ArrowRight } from "lucide-react";
 
 export default function MissionSection() {
   const containerRef = useRef(null);
@@ -63,14 +63,8 @@ export default function MissionSection() {
                     To reduce patient suffering as much as possible
                   </h3>
                   
-                  <div className="flex items-center justify-center mb-6 md:mb-8">
-                    <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-ara-blue to-transparent"></div>
-                    <ArrowRight className="h-6 w-6 text-ara-blue mx-4" />
-                    <div className="w-12 h-0.5 bg-gradient-to-r from-ara-blue via-ara-teal to-transparent"></div>
-                  </div>
-                  
                   <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-medium">
-                    and build a more effective healthcare system that prioritizes patient well-being.
+                    by building a more effective healthcare system..
                   </p>
                 </div>
               </div>
@@ -85,9 +79,6 @@ export default function MissionSection() {
         >
           {/* Pillar 1 - Reduce Suffering */}
           <div className="text-center group">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transition-transform duration-300 group-hover:scale-110">
-              <Shield className="h-10 w-10 md:h-12 md:w-12 text-white transition-transform duration-300 group-hover:scale-110" />
-            </div>
             <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
               Reduce Suffering
             </h3>
@@ -98,9 +89,6 @@ export default function MissionSection() {
 
           {/* Pillar 2 - Build Effective System */}
           <div className="text-center group">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transition-transform duration-300 group-hover:scale-110">
-              <Target className="h-10 w-10 md:h-12 md:w-12 text-white transition-transform duration-300 group-hover:scale-110" />
-            </div>
             <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
               Build Effective System
             </h3>
@@ -111,9 +99,6 @@ export default function MissionSection() {
 
           {/* Pillar 3 - Prioritize Well-being */}
           <div className="text-center group">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transition-transform duration-300 group-hover:scale-110">
-              <Users className="h-10 w-10 md:h-12 md:w-12 text-white transition-transform duration-300 group-hover:scale-110" />
-            </div>
             <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
               Prioritize Well-being
             </h3>
