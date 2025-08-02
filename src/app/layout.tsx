@@ -9,9 +9,6 @@ export const metadata: Metadata = {
   title: "Ara Health - Patient-First Healthcare AI",
   description:
     "Solving values misalignment in healthcare with patient-first AI platform dedicated to improving patient experience and outcomes.",
-  icons: {
-    icon: "/ara-logo.svg",
-  },
 };
 
 export default function RootLayout({
