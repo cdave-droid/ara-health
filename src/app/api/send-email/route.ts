@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend("re_HL6LD4tr_LnDxYKcadKL8FeVPW2MycKYq");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     // Create HTML email content
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #0A1F3D; margin-bottom: 20px;">New Contact Form Submission</h2>
+        <h2 style="color: #0A1F3D; margin-bottom: 20px;">Ara Health: New Contact Form Submission</h2>
         
         <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
           <h3 style="color: #0A1F3D; margin-top: 0;">Contact Information</h3>
@@ -41,8 +41,8 @@ export async function POST(request: NextRequest) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "hey.zulele@gmail.com",
-      subject: `New Contact Form Submission from ${name}`,
+      to: "chintan@arahealth.ai",
+      subject: `Ara Health: New Contact Form Submission from ${name}`,
       html: htmlContent,
       replyTo: email,
     });

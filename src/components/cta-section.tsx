@@ -28,6 +28,9 @@ export default function CTASection() {
   const containerRef = useRef(null);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isSurveyOpen, setIsSurveyOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -48,13 +51,43 @@ export default function CTASection() {
   const cardsOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
   const cardsY = useTransform(scrollYProgress, [0.2, 0.4], [30, 0]);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your email
-    // For now, we'll just close the dialog
-    setIsContactOpen(false);
-    setContactForm({ name: "", email: "", query: "" });
-    alert("Thank you for your message! We'll get back to you soon.");
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: contactForm.name,
+          email: contactForm.email,
+          organization: "",
+          message: contactForm.query,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send email");
+      }
+
+      setIsSubmitted(true);
+      setContactForm({ name: "", email: "", query: "" });
+
+      // Close dialog after a short delay
+      setTimeout(() => {
+        setIsContactOpen(false);
+        setIsSubmitted(false);
+      }, 2000);
+    } catch (err) {
+      setSubmitError("Failed to send message. Please try again.");
+      console.error("Error sending email:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -205,66 +238,124 @@ export default function CTASection() {
               organization.
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleContactSubmit} className="space-y-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Name
-              </label>
-              <Input
-                id="name"
-                type="text"
-                value={contactForm.name}
-                onChange={(e) =>
-                  setContactForm({ ...contactForm, name: e.target.value })
-                }
-                required
-                placeholder="Your name"
-              />
+
+          {isSubmitted ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Thank You!
+              </h3>
+              <p className="text-gray-600">
+                We&apos;ve received your message and will get back to you soon.
+              </p>
             </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                value={contactForm.email}
-                onChange={(e) =>
-                  setContactForm({ ...contactForm, email: e.target.value })
-                }
-                required
-                placeholder="your.email@example.com"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="query"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Message
-              </label>
-              <Textarea
-                id="query"
-                value={contactForm.query}
-                onChange={(e) =>
-                  setContactForm({ ...contactForm, query: e.target.value })
-                }
-                required
-                placeholder="Tell us about your needs..."
-                rows={4}
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              <Send className="mr-2 h-4 w-4" />
-              Send Message
-            </Button>
-          </form>
+          ) : (
+            <form onSubmit={handleContactSubmit} className="space-y-4">
+              {submitError && (
+                <div className="flex items-center space-x-2 p-3 bg-red-50 border border-red-200 rounded-md">
+                  <svg
+                    className="h-4 w-4 text-red-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span className="text-red-700 text-sm">{submitError}</span>
+                </div>
+              )}
+
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Name
+                </label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={contactForm.name}
+                  onChange={(e) =>
+                    setContactForm({ ...contactForm, name: e.target.value })
+                  }
+                  required
+                  placeholder="Your name"
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={contactForm.email}
+                  onChange={(e) =>
+                    setContactForm({ ...contactForm, email: e.target.value })
+                  }
+                  required
+                  placeholder="your.email@example.com"
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="query"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Message
+                </label>
+                <Textarea
+                  id="query"
+                  value={contactForm.query}
+                  onChange={(e) =>
+                    setContactForm({ ...contactForm, query: e.target.value })
+                  }
+                  required
+                  placeholder="Tell us about your needs..."
+                  rows={4}
+                  disabled={isSubmitting}
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-4 w-4" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
         </DialogContent>
       </Dialog>
 
