@@ -44,7 +44,7 @@ export default function SolutionSection() {
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
           <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
-            Our Solution
+            Our <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">Solution</span>
           </h2>
           <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-gray-600 max-w-4xl md:max-w-6xl mx-auto leading-relaxed px-4">
             Ara Health provides a comprehensive AI platform that automates and

@@ -41,7 +41,7 @@ export default function WhereWeAreSection() {
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
           <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
-            Where We Are Today
+            Where We Are <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">Today</span>
           </h2>
         </motion.div>
 
@@ -139,14 +139,12 @@ export default function WhereWeAreSection() {
                           Design Partners
                         </h3>
                         <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-                          Looking for design-partner hospitals, long-term-care
-                          organisations, and patient advocates who want to shape
-                          the product from ground up.
+                          Working with design partners to shape the product from ground up.
                         </p>
                         <div className="mt-4 flex items-center justify-center sm:justify-start space-x-2">
-                          <div className="w-2 h-2 bg-ara-gold rounded-full animate-pulse"></div>
-                          <span className="text-xs md:text-sm text-ara-gold font-medium">
-                            Seeking Partners
+                          <div className="w-2 h-2 bg-ara-teal rounded-full animate-pulse"></div>
+                          <span className="text-xs md:text-sm text-ara-teal font-medium">
+                            Active partnerships
                           </span>
                         </div>
                       </div>

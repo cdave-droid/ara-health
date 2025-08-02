@@ -2,32 +2,36 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Heart, FileText, Zap, AlertTriangle } from "lucide-react";
+import { Shield, Heart, Users, Zap, CheckCircle } from "lucide-react";
 
-export default function ProblemSection() {
+export default function WhyAraHealthSection() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Problem text animations - appears, holds, then scrolls up (no fade out)
+  // Section text animations - appears, holds, then scrolls up
   const textY = useTransform(scrollYProgress, [0, 0.15, 0.3], [0, 0, -100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.15, 0.3], [1, 1, 1]);
   const textScale = useTransform(scrollYProgress, [0, 0.15, 0.3], [1, 1, 1]);
 
-  // Card animations - simplified for mobile, more complex for desktop
-  const card1Opacity = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
-  const card1Y = useTransform(scrollYProgress, [0.15, 0.25], [30, 0]);
-  const card1Scale = useTransform(scrollYProgress, [0.15, 0.25], [0.9, 1]);
+  // Card animations - fade in one by one
+  const card1Opacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
+  const card1Y = useTransform(scrollYProgress, [0.2, 0.3], [30, 0]);
+  const card1Scale = useTransform(scrollYProgress, [0.2, 0.3], [0.9, 1]);
 
-  const card2Opacity = useTransform(scrollYProgress, [0.25, 0.35], [0, 1]);
-  const card2Y = useTransform(scrollYProgress, [0.25, 0.35], [30, 0]);
-  const card2Scale = useTransform(scrollYProgress, [0.25, 0.35], [0.9, 1]);
+  const card2Opacity = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
+  const card2Y = useTransform(scrollYProgress, [0.3, 0.4], [30, 0]);
+  const card2Scale = useTransform(scrollYProgress, [0.3, 0.4], [0.9, 1]);
 
-  const card3Opacity = useTransform(scrollYProgress, [0.35, 0.45], [0, 1]);
-  const card3Y = useTransform(scrollYProgress, [0.35, 0.45], [30, 0]);
-  const card3Scale = useTransform(scrollYProgress, [0.35, 0.45], [0.9, 1]);
+  const card3Opacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
+  const card3Y = useTransform(scrollYProgress, [0.4, 0.5], [30, 0]);
+  const card3Scale = useTransform(scrollYProgress, [0.4, 0.5], [0.9, 1]);
+
+  const card4Opacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1]);
+  const card4Y = useTransform(scrollYProgress, [0.5, 0.6], [30, 0]);
+  const card4Scale = useTransform(scrollYProgress, [0.5, 0.6], [0.9, 1]);
 
   return (
     <section
@@ -35,24 +39,22 @@ export default function ProblemSection() {
       className="py-16 md:py-32 relative min-h-screen"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Problem Text - Appears, holds, then scrolls up */}
+        {/* Section Text - Appears, holds, then scrolls up */}
         <motion.div
           className="text-center mb-8 md:mb-16"
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
           <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
-            The <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">Problem</span>?
+            Why <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">Ara Health</span>?
           </h2>
           <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-gray-600 max-w-4xl md:max-w-6xl mx-auto leading-relaxed px-4">
-            Patient values and medical preferences are not captured effectively
-            and often lost amongst the complexities and various siloes within
-            the healthcare system.
+            We're building the future of healthcare with patient values at the center.
           </p>
         </motion.div>
 
-        {/* Cards Container - Vertical stack on mobile, horizontal on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {/* Card 1 - The Critical Moment */}
+        {/* Cards Container - 2x2 grid on desktop, single column on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {/* Card 1 - Built on Open Standards */}
           <motion.div
             className="w-full"
             style={{
@@ -63,19 +65,18 @@ export default function ProblemSection() {
           >
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-ara-blue h-full flex flex-col">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
-                <Heart className="h-6 w-6 md:h-8 md:w-8 text-white" />
+                <Shield className="h-6 w-6 md:h-8 md:w-8 text-white" />
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3 md:mb-4 text-center">
-                The Critical Moment
+                Built on Open Standards
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg flex-grow">
-                When a code blue (i.e. cardiac arrest) is called, clinicians
-                have seconds to decide whether to resuscitate or not.
+                We're aligning with HL7 and SMART-on-FHIR so hospitals don't need custom interfaces.
               </p>
             </div>
           </motion.div>
 
-          {/* Card 2 - Lost Directives */}
+          {/* Card 2 - Patient-First */}
           <motion.div
             className="w-full"
             style={{
@@ -86,21 +87,18 @@ export default function ProblemSection() {
           >
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-ara-blue h-full flex flex-col">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
-                <FileText className="h-6 w-6 md:h-8 md:w-8 text-white" />
+                <Heart className="h-6 w-6 md:h-8 md:w-8 text-white" />
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3 md:mb-4 text-center">
-                Lost Directives
+                Patient-First. Always.
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg flex-grow">
-                Today, a legally signed advanced directive or a
-                Do-Not-Resuscitate (DNR) form often sits in a filing cabinet, a
-                family inbox, or lost in a patient-portal PDF that nobody can
-                find at the bedside.
+                Patients and families keep a clear, shareable record of critical medical decisions through a patient's health care journey.
               </p>
             </div>
           </motion.div>
 
-          {/* Card 3 - The Cost of Delay */}
+          {/* Card 3 - Clinician-Friendly */}
           <motion.div
             className="w-full"
             style={{
@@ -111,17 +109,35 @@ export default function ProblemSection() {
           >
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-ara-blue h-full flex flex-col">
               <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
-                <Zap className="h-6 w-6 md:h-8 md:w-8 text-white" />
+                <Users className="h-6 w-6 md:h-8 md:w-8 text-white" />
               </div>
               <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3 md:mb-4 text-center">
-                The Cost of Delay
+                Clinician-Friendly
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg flex-grow">
-                The default is full resuscitation, even when the patient would
-                have chosen otherwise. Each unnecessary resuscitation costs the
-                system $30–50,000. Worse, the patient may die without dignity or
-                respect for their choices, leaving families emotionally
-                devastated.
+                Zero-click banner in the chart—information appears where and when care teams already look.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Card 4 - Enterprise Grade Security */}
+          <motion.div
+            className="w-full"
+            style={{
+              opacity: card4Opacity,
+              y: card4Y,
+              scale: card4Scale,
+            }}
+          >
+            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-ara-blue h-full flex flex-col">
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
+                <CheckCircle className="h-6 w-6 md:h-8 md:w-8 text-white" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3 md:mb-4 text-center">
+                Enterprise Grade Security
+              </h3>
+              <p className="text-gray-700 leading-relaxed text-base md:text-lg flex-grow">
+                HIPAA compliant, so your medical information is always secure.
               </p>
             </div>
           </motion.div>
@@ -129,4 +145,4 @@ export default function ProblemSection() {
       </div>
     </section>
   );
-}
+} 

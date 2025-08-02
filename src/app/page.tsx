@@ -23,6 +23,9 @@ import ProblemSection from "@/components/problem-section";
 import SolutionSection from "@/components/solution-section";
 import TeamSection from "@/components/team-section";
 import WhereWeAreSection from "@/components/where-we-are-section";
+import WhyAraHealthSection from "@/components/why-ara-health-section";
+import MissionSection from "@/components/mission-section";
+import CTASection from "@/components/cta-section";
 
 import {
   Heart,
@@ -40,6 +43,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { AnimatedNavbar } from "@/components/animated-navbar";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -133,37 +137,39 @@ export default function Home() {
       {/* Navigation */}
       <AnimatedNavbar />
       {/* Hero Section */}
-      <HeroSection onVideoOpen={() => setIsVideoOpen(true)} />
+      <HeroSection />
 
       {/* The Problem Section  */}
       <ProblemSection />
 
       {/* The Solution Section  */}
-      <SolutionSection />
+      <div id="solution">
+        <SolutionSection />
+      </div>
 
       {/* The Team Section  */}
-      <TeamSection />
+      <div id="team">
+        <TeamSection />
+      </div>
 
       {/* Where We Are Today Section  */}
       <WhereWeAreSection />
 
       {/* Why Ara Health Section  */}
-      {/* <WhyAraHealthSection /> */}
+      <WhyAraHealthSection />
 
-      {/* Mission Section */}
-      {/* <section className="py-20 bg-gradient-to-br from-ara-navy via-ara-blue-dark to-ara-navy text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-inter font-bold mb-6">
-            Our Mission
-          </h2>
-          <p className="text-xl md:text-2xl text-ara-white/90 leading-relaxed">
-            To reduce patient suffering as much as possible and build a more
-            effective healthcare system that prioritizes patient well-being.
-          </p>
-        </div>
-      </section> */}
+            {/* Mission Section */}
+      <div id="mission">
+        <MissionSection />
+      </div>
 
-      {/* CTA Section - Commented out */}
+      {/* CTA Section */}
+      <div id="contact">
+        <CTASection />
+      </div>
+
+      {/* Footer */}
+      <Footer />
       {/*
       <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
