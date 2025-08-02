@@ -44,6 +44,7 @@ import {
 } from "lucide-react";
 import { AnimatedNavbar } from "@/components/animated-navbar";
 import Footer from "@/components/footer";
+import { DynamicGradientBackground } from "@/components/dynamic-gradient-bg";
 
 export default function Home() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -131,8 +132,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Fixed Background Gradient */}
-      <div className="fixed inset-0 bg-gradient-to-br from-white via-ara-blue-light/10 to-ara-teal-light/10 -z-10"></div>
+      {/* Dynamic Background Gradient */}
+      <DynamicGradientBackground />
 
       {/* Navigation */}
       <AnimatedNavbar />
@@ -158,7 +159,7 @@ export default function Home() {
       {/* Why Ara Health Section  */}
       <WhyAraHealthSection />
 
-            {/* Mission Section */}
+      {/* Mission Section */}
       <div id="mission">
         <MissionSection />
       </div>
