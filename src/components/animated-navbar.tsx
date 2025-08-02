@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { WaitlistDialog } from "./waitlist-dialog";
 
 interface NavLink {
   href: string;
@@ -23,6 +24,7 @@ const navLinks: NavLink[] = [
 export function AnimatedNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -154,6 +156,7 @@ export function AnimatedNavbar() {
                   transition: { duration: 0.2 },
                 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setIsWaitlistOpen(true)}
               >
                 JOIN WAITLIST
               </motion.button>
@@ -198,11 +201,24 @@ export function AnimatedNavbar() {
                     {link.label}
                   </motion.button>
                 ))}
+                <motion.button
+                  onClick={() => {
+                    setIsWaitlistOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block text-white/90 hover:text-white font-inter font-medium transition-colors duration-200 py-2 border-b border-white/10 last:border-b-0 w-full text-left"
+                  whileHover={{ x: 10 }}
+                >
+                  Join Waitlist
+                </motion.button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
+
+      {/* Waitlist Dialog */}
+      <WaitlistDialog open={isWaitlistOpen} onOpenChange={setIsWaitlistOpen} />
     </motion.nav>
   );
 }

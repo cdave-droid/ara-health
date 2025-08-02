@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Orb from "./orb";
+import { WaitlistDialog } from "./waitlist-dialog";
 
 interface HeroSectionProps {
   // Removed onVideoOpen prop as it's no longer needed
@@ -12,6 +13,7 @@ interface HeroSectionProps {
 
 export function HeroSection({}: HeroSectionProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const { scrollY } = useScroll();
 
   // Transform values for scroll animations
@@ -108,7 +110,10 @@ export function HeroSection({}: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           >
-            <button className="relative flex items-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden font-medium transition-all bg-ara-blue rounded-lg group text-base sm:text-lg shadow-lg w-full sm:w-auto">
+            <button
+              className="relative flex items-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden font-medium transition-all bg-ara-blue rounded-lg group text-base sm:text-lg shadow-lg w-full sm:w-auto"
+              onClick={() => setIsWaitlistOpen(true)}
+            >
               <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-ara-blue-dark rounded group-hover:-mr-4 group-hover:-mt-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
               </span>
@@ -122,7 +127,10 @@ export function HeroSection({}: HeroSectionProps) {
               </span>
             </button>
 
-            <button className="relative flex items-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden font-medium transition-all bg-white text-ara-navy rounded-lg group text-base sm:text-lg shadow-lg w-full sm:w-auto hover:bg-gray-50">
+            <button
+              className="relative flex items-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden font-medium transition-all bg-white text-ara-navy rounded-lg group text-base sm:text-lg shadow-lg w-full sm:w-auto hover:bg-gray-50"
+              onClick={() => setIsWaitlistOpen(true)}
+            >
               <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-gray-200 rounded group-hover:-mr-4 group-hover:-mt-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
               </span>
@@ -143,6 +151,9 @@ export function HeroSection({}: HeroSectionProps) {
       <div className="fixed top-20 left-10 w-20 h-20 bg-ara-blue/10 rounded-full blur-xl"></div>
       <div className="fixed bottom-20 right-10 w-32 h-32 bg-ara-teal/10 rounded-full blur-xl"></div>
       <div className="fixed top-40 right-20 w-16 h-16 bg-ara-blue-light/15 rounded-full blur-lg"></div>
+
+      {/* Waitlist Dialog */}
+      <WaitlistDialog open={isWaitlistOpen} onOpenChange={setIsWaitlistOpen} />
     </section>
   );
 }
