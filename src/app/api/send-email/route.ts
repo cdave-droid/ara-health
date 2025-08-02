@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "ara-health@customer.buildit4me.com",
       to: "chintan@arahealth.ai",
       subject: `Ara Health: New Contact Form Submission from ${name}`,
       html: htmlContent,

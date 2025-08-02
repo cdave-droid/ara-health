@@ -37,7 +37,7 @@ export default function TeamSection() {
           className="text-center mb-8 md:mb-12"
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
-          <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-white mb-6 md:mb-12 leading-tight">
             Meet the{" "}
             <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">
               Team
