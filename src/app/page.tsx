@@ -18,20 +18,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { ContactForm } from "@/components/contact-form";
-import { SurveyForm } from "@/components/survey-form";
-import { AraLogo } from "@/components/ara-logo";
-import Orb from "@/components/orb";
-import GlassyConnector from "@/components/GlassyConnector";
-import VerticalGlassyConnector from "@/components/VerticalGlassyConnector";
-import TiltedCard from "@/components/TiltedCard";
 import { HeroSection } from "@/components/hero-section";
 import ProblemSection from "@/components/problem-section";
 import SolutionSection from "@/components/solution-section";
 import TeamSection from "@/components/team-section";
 import WhereWeAreSection from "@/components/where-we-are-section";
-import WhyAraHealthSection from "@/components/why-ara-health-section";
 
 import {
   Heart,
