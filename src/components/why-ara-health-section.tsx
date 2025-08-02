@@ -45,10 +45,15 @@ export default function WhyAraHealthSection() {
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
           <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
-            Why <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">Ara Health</span>?
+            Why{" "}
+            <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">
+              Ara Health
+            </span>
+            ?
           </h2>
           <p className="text-lg md:text-2xl lg:text-3xl xl:text-4xl text-gray-600 max-w-4xl md:max-w-6xl mx-auto leading-relaxed px-4">
-            We're building the future of healthcare with patient values at the center.
+            We&apos;re building the future of healthcare with patient values at
+            the center.
           </p>
         </motion.div>
 
@@ -71,7 +76,8 @@ export default function WhyAraHealthSection() {
                 Built on Open Standards
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg flex-grow">
-                We're aligning with HL7 and SMART-on-FHIR so hospitals don't need custom interfaces.
+                We&apos;re aligning with HL7 and SMART-on-FHIR so hospitals
+                don&apos;t need custom interfaces.
               </p>
             </div>
           </motion.div>
@@ -93,7 +99,8 @@ export default function WhyAraHealthSection() {
                 Patient-First. Always.
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg flex-grow">
-                Patients and families keep a clear, shareable record of critical medical decisions through a patient's health care journey.
+                Patients and families keep a clear, shareable record of critical
+                medical decisions through a patient&apos;s health care journey.
               </p>
             </div>
           </motion.div>
@@ -115,7 +122,8 @@ export default function WhyAraHealthSection() {
                 Clinician-Friendly
               </h3>
               <p className="text-gray-700 leading-relaxed text-base md:text-lg flex-grow">
-                Zero-click banner in the chart—information appears where and when care teams already look.
+                Zero-click banner in the chart—information appears where and
+                when care teams already look.
               </p>
             </div>
           </motion.div>
@@ -145,4 +153,4 @@ export default function WhyAraHealthSection() {
       </div>
     </section>
   );
-} 
+}

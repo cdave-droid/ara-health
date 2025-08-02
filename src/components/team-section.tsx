@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Linkedin, Award, Star, User } from "lucide-react";
+import Image from "next/image";
 
 export default function TeamSection() {
   const containerRef = useRef(null);
@@ -33,11 +34,14 @@ export default function TeamSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
         {/* Team Text - Appears, holds, then scrolls up */}
         <motion.div
-          className="text-center mb-12 md:mb-24"
+          className="text-center mb-8 md:mb-12"
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
           <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
-            Meet the <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">Team</span>
+            Meet the{" "}
+            <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">
+              Team
+            </span>
           </h2>
         </motion.div>
 
@@ -51,9 +55,11 @@ export default function TeamSection() {
             <div className="relative w-full h-full group">
               <div className="absolute inset-0 w-full h-full bg-white rounded-2xl shadow-lg border border-ara-blue overflow-hidden">
                 <div className="relative w-full h-full">
-                  <img
+                  <Image
                     src="/ceo.avif"
                     alt="Dr. Chintan Dave"
+                    width={600}
+                    height={600}
                     className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-all duration-700 group-hover:from-black/80"></div>

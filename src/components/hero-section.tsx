@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Orb from "./orb";
 
 interface HeroSectionProps {
@@ -69,14 +70,14 @@ export function HeroSection({}: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <img
+            <Image
               src="/logo.png"
               alt="Ara Health Logo"
+              width={96}
+              height={96}
               className="h-12 sm:h-16 md:h-20 lg:h-24 mx-auto rounded-full object-cover"
             />
           </motion.div>
-
-
 
           <motion.h1
             className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-inter font-bold text-ara-navy mb-4 md:mb-6 leading-tight pointer-events-auto px-2"
