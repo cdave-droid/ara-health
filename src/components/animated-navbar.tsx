@@ -12,9 +12,9 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/problem-demo", label: "Problem" },
-  { href: "/navbar-demo", label: "Navbar Demo" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Problem" },
+  { href: "/", label: "Solution" },
+  { href: "/", label: "Contact" },
 ];
 
 export function AnimatedNavbar() {
