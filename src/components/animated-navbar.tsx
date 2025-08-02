@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 interface NavLink {
   href: string;
@@ -18,6 +19,7 @@ const navLinks: NavLink[] = [
 
 export function AnimatedNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +81,7 @@ export function AnimatedNavbar() {
             </motion.span>
           </motion.div>
 
-          {/* Navigation Links - Only visible when not scrolled */}
+          {/* Desktop Navigation Links - Only visible when not scrolled */}
           <AnimatePresence>
             {!isScrolled && (
               <motion.div
@@ -110,29 +112,72 @@ export function AnimatedNavbar() {
             )}
           </AnimatePresence>
 
-          {/* CTA Button */}
-          <motion.div
-            layout
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          >
-            <motion.button
-              className="px-4 py-2 font-inter font-semibold rounded-xl transition-all duration-200 text-sm whitespace-nowrap bg-white text-[#0A1F3D] hover:bg-white/90 shadow-lg hover:shadow-xl"
+          {/* Mobile Menu Button */}
+          <div className="flex items-center space-x-4">
+            {/* CTA Button */}
+            <motion.div
               layout
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
-              }}
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.2 },
-              }}
-              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="hidden md:block"
             >
-              JOIN WAITLIST
-            </motion.button>
-          </motion.div>
+              <motion.button
+                className="px-3 py-1.5 md:px-4 md:py-2 font-inter font-semibold rounded-xl transition-all duration-200 text-xs md:text-sm whitespace-nowrap bg-white text-[#0A1F3D] hover:bg-white/90 shadow-lg hover:shadow-xl"
+                layout
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                JOIN WAITLIST
+              </motion.button>
+            </motion.div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 text-white hover:text-white/80 transition-colors duration-200"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              className="md:hidden bg-[#0A1F3D] border-t border-white/10"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <div className="px-6 py-4 space-y-4">
+                {navLinks.map((link) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    className="block text-white/90 hover:text-white font-inter font-medium transition-colors duration-200 py-2 border-b border-white/10 last:border-b-0"
+                    whileHover={{ x: 10 }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.nav>
   );

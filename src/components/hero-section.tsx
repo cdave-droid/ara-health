@@ -63,7 +63,7 @@ export function HeroSection({ onVideoOpen }: HeroSectionProps) {
       >
         <div className="text-center">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-inter font-bold text-ara-navy mb-6 leading-tight pointer-events-auto"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-inter font-bold text-ara-navy mb-4 md:mb-6 leading-tight pointer-events-auto px-2"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -75,7 +75,7 @@ export function HeroSection({ onVideoOpen }: HeroSectionProps) {
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-10 leading-relaxed pointer-events-auto"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl md:max-w-4xl mx-auto mb-6 md:mb-10 leading-relaxed pointer-events-auto px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -86,12 +86,12 @@ export function HeroSection({ onVideoOpen }: HeroSectionProps) {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pointer-events-auto px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            <button className="relative flex items-center px-8 py-4 overflow-hidden font-medium transition-all bg-ara-blue rounded-lg group text-lg shadow-lg">
+            <button className="relative flex items-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden font-medium transition-all bg-ara-blue rounded-lg group text-base sm:text-lg shadow-lg w-full sm:w-auto">
               <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-ara-blue-dark rounded group-hover:-mr-4 group-hover:-mt-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
               </span>
@@ -99,15 +99,15 @@ export function HeroSection({ onVideoOpen }: HeroSectionProps) {
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
               </span>
               <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-ara-blue-dark rounded-lg group-hover:translate-x-0"></span>
-              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white flex items-center">
+              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white flex items-center justify-center sm:justify-start">
                 Join the early-access list
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </span>
             </button>
 
             <button
               onClick={onVideoOpen}
-              className="relative flex items-center px-8 py-4 overflow-hidden font-medium transition-all bg-transparent border-2 border-ara-blue/30 rounded-lg group text-lg backdrop-blur-sm"
+              className="relative flex items-center px-6 sm:px-8 py-3 sm:py-4 overflow-hidden font-medium transition-all bg-transparent border-2 border-ara-blue/30 rounded-lg group text-base sm:text-lg backdrop-blur-sm w-full sm:w-auto"
             >
               <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-ara-blue/20 rounded group-hover:-mr-4 group-hover:-mt-4">
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-ara-blue"></span>
@@ -116,8 +116,8 @@ export function HeroSection({ onVideoOpen }: HeroSectionProps) {
                 <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-ara-blue"></span>
               </span>
               <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-ara-blue/10 rounded-lg group-hover:translate-x-0"></span>
-              <span className="relative w-full text-left text-ara-blue transition-colors duration-200 ease-in-out group-hover:text-ara-blue flex items-center">
-                <Play className="mr-2 h-5 w-5" />
+              <span className="relative w-full text-left text-ara-blue transition-colors duration-200 ease-in-out group-hover:text-ara-blue flex items-center justify-center sm:justify-start">
+                <Play className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 Watch Founder Video
               </span>
             </button>

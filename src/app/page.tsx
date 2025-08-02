@@ -163,40 +163,39 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* CTA Section */}
-      <section className="py-20">
+      {/* CTA Section - Commented out */}
+      {/*
+      <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-inter font-bold text-ara-navy mb-6">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-inter font-bold text-ara-navy mb-4 md:mb-6">
               Let&apos;s Build a New Medical System Together
             </h2>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
               We&apos;re creating a healthcare ecosystem where patient values
               are at the center of every decision. Join us in transforming how
               care is delivered, experienced, and improved.
             </p>
           </div>
 
-          {/* Enhanced Cards Grid */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Health System Card */}
-            <Card className="p-8 border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] text-center bg-white/80 backdrop-blur-sm relative overflow-hidden group h-full flex flex-col">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+            <Card className="p-6 md:p-8 border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] text-center bg-white/80 backdrop-blur-sm relative overflow-hidden group h-full flex flex-col">
               <div className="absolute inset-0 bg-gradient-to-br from-ara-blue/5 to-ara-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <CardHeader className="relative z-10 flex-shrink-0">
-                <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
-                  <Users className="h-10 w-10 text-white" />
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <Users className="h-8 w-8 md:h-10 md:w-10 text-white" />
                 </div>
-                <CardTitle className="text-ara-navy">
+                <CardTitle className="text-lg md:text-xl text-ara-navy">
                   Health System or Outpatient Clinic?
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600 mb-4 text-sm md:text-base">
                   Reach out to learn how we can save your clinic valuable
                   resources and improve patient outcomes and satisfaction.
                 </p>
                 <Button
-                  className="w-full bg-gradient-to-r from-ara-blue to-ara-blue-dark hover:from-ara-blue-dark hover:to-ara-blue shadow-md"
+                  className="w-full bg-gradient-to-r from-ara-blue to-ara-blue-dark hover:from-ara-blue-dark hover:to-ara-blue shadow-md text-sm md:text-base"
                   onClick={() => setIsContactOpen(true)}
                 >
                   Contact Us
@@ -204,53 +203,51 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            {/* Clinician Card */}
-            <Card className="p-8 border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] text-center bg-white/80 backdrop-blur-sm relative overflow-hidden group h-full flex flex-col">
+            <Card className="p-6 md:p-8 border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] text-center bg-white/80 backdrop-blur-sm relative overflow-hidden group h-full flex flex-col">
               <div className="absolute inset-0 bg-gradient-to-br from-ara-teal/5 to-ara-teal/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <CardHeader className="relative z-10 flex-shrink-0">
-                <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
-                  <Heart className="h-10 w-10 text-white" />
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <Heart className="h-8 w-8 md:h-10 md:w-10 text-white" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-ara-navy mb-4">
+                <CardTitle className="text-lg md:text-xl font-bold text-ara-navy mb-2 md:mb-4">
                   Clinician?
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600 mb-4 text-sm md:text-base">
                   Help us test the one-click workflow and improve patient care
                   delivery.
                 </p>
                 <div className="mt-auto">
                   <Button
                     variant="outline"
-                    className="w-full border-2 border-ara-teal text-ara-teal hover:bg-ara-teal hover:text-white font-semibold py-3 h-12 text-base transition-all duration-300"
+                    className="w-full border-2 border-ara-teal text-ara-teal hover:bg-ara-teal hover:text-white font-semibold py-2 md:py-3 h-10 md:h-12 text-sm md:text-base transition-all duration-300"
                   >
-                    <Users className="mr-2 h-5 w-5" />
+                    <Users className="mr-2 h-4 w-4 md:h-5 md:w-5" />
                     Join Beta Program
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Patient Card */}
-            <Card className="p-8 border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] text-center bg-white/80 backdrop-blur-sm relative overflow-hidden group h-full flex flex-col">
+            <Card className="p-6 md:p-8 border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] text-center bg-white/80 backdrop-blur-sm relative overflow-hidden group h-full flex flex-col md:col-span-2 lg:col-span-1">
               <div className="absolute inset-0 bg-gradient-to-br from-ara-gold/5 to-ara-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <CardHeader className="relative z-10 flex-shrink-0">
-                <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
-                  <FileText className="h-10 w-10 text-white" />
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <FileText className="h-8 w-8 md:h-10 md:w-10 text-white" />
                 </div>
-                <CardTitle className="text-ara-navy">
+                <CardTitle className="text-lg md:text-xl text-ara-navy">
                   Patient or Caregiver?
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600 mb-4 text-sm md:text-base">
                   Join the beta and tell us what makes advance-care planning for
                   medical care easier.
                 </p>
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full text-sm md:text-base"
                   onClick={() => setIsSurveyOpen(true)}
                 >
                   Take Survey
@@ -259,43 +256,30 @@ export default function Home() {
             </Card>
           </div>
 
-          {/* Enhanced Call to Action */}
           <div className="text-center">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-ara-blue to-ara-blue-dark hover:from-ara-blue-dark hover:to-ara-blue text-white px-8 py-4 text-lg shadow-lg"
+              className="bg-gradient-to-r from-ara-blue to-ara-blue-dark hover:from-ara-blue-dark hover:to-ara-blue text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg shadow-lg"
               onClick={() => setIsContactOpen(true)}
             >
-              <Mail className="mr-2 h-5 w-5" />
+              <Mail className="mr-2 h-4 w-4 md:h-5 md:w-5" />
               Contact Us
             </Button>
           </div>
         </div>
       </section>
+      */}
 
       {/* Footer */}
-      {/* <footer className="bg-ara-navy text-white py-12">
+      {/* <footer className="bg-ara-navy text-white pt-8 bottom-0 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <AraLogo width={48} height={48} />
-              <span className="text-2xl font-inter font-semibold">
-                Ara Health
+          <div className="text-center relative">
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-inter font-bold tracking-widest relative mb-0 pb-0">
+              <span className="absolute inset-0 bg-gradient-to-br text-white bg-clip-text text-transparent">
+                ARA HEALTH
               </span>
-            </div>
-            <p className="text-ara-white/90 mb-4">
-              In active development—help us build a better last mile between
-              patients&apos; wishes and bedside care.
-            </p>
-            <p className="text-ara-white/80">
-              Email:{" "}
-              <a
-                href="mailto:chintan@arahealth.ai"
-                className="text-ara-blue hover:underline"
-              >
-                chintan@arahealth.ai
-              </a>
-            </p>
+              <span className="relative text-white/5">ARA HEALTH</span>
+            </h1>
           </div>
         </div>
       </footer> */}

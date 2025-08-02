@@ -30,25 +30,28 @@ export default function WhereWeAreSection() {
   const item3Scale = useTransform(scrollYProgress, [0.4, 0.7], [0.9, 1]);
 
   return (
-    <section ref={containerRef} className="py-80 relative min-h-screen">
+    <section
+      ref={containerRef}
+      className="py-16 md:py-80 relative min-h-screen"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Text - Appears, holds, then scrolls up */}
         <motion.div
-          className="text-center mb-56"
+          className="text-center mb-16 md:mb-56"
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
-          <h2 className="text-6xl md:text-8xl lg:text-9xl font-inter font-bold text-ara-navy mb-12 leading-tight">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
             Where We Are Today
           </h2>
         </motion.div>
 
         {/* Timeline Component */}
         <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-ara-blue via-ara-teal to-ara-gold rounded-full"></div>
+          {/* Timeline Line - Hidden on mobile, visible on desktop */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-ara-blue via-ara-teal to-ara-gold rounded-full"></div>
 
           {/* Timeline Items */}
-          <div className="space-y-24">
+          <div className="space-y-12 md:space-y-24">
             {/* Item 1 - Early Prototypes */}
             <motion.div
               className="relative group"
@@ -56,23 +59,23 @@ export default function WhereWeAreSection() {
             >
               <div className="flex items-center justify-center md:justify-start md:pr-8">
                 {/* Content Card */}
-                <div className="ml-8 md:ml-12 flex-1">
-                  <div className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white rounded-2xl p-8 border border-ara-blue">
-                    <div className="flex items-start space-x-6">
-                      <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                        <Smartphone className="h-8 w-8 text-white" />
+                <div className="w-full md:ml-12 md:flex-1">
+                  <div className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white rounded-2xl p-6 md:p-8 border border-ara-blue">
+                    <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                      <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300 mx-auto sm:mx-0">
+                        <Smartphone className="h-6 w-6 md:h-8 md:w-8 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-ara-navy mb-4 group-hover:text-ara-blue transition-colors duration-300">
+                      <div className="flex-1 text-center sm:text-left">
+                        <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3 md:mb-4 group-hover:text-ara-blue transition-colors duration-300">
                           Early Prototypes
                         </h3>
-                        <p className="text-gray-700 leading-relaxed text-lg">
+                        <p className="text-gray-700 leading-relaxed text-base md:text-lg">
                           Early prototypes and testing of the mobile app are in
                           progress.
                         </p>
-                        <div className="mt-4 flex items-center space-x-2">
+                        <div className="mt-4 flex items-center justify-center sm:justify-start space-x-2">
                           <div className="w-2 h-2 bg-ara-blue rounded-full animate-pulse"></div>
-                          <span className="text-sm text-ara-blue font-medium">
+                          <span className="text-xs md:text-sm text-ara-blue font-medium">
                             In Development
                           </span>
                         </div>
@@ -90,24 +93,24 @@ export default function WhereWeAreSection() {
             >
               <div className="flex items-center justify-center md:justify-end md:pl-8">
                 {/* Content Card */}
-                <div className="mr-8 md:mr-12 flex-1 order-1 md:order-2">
-                  <div className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white rounded-2xl p-8 border border-ara-blue">
-                    <div className="flex items-start space-x-6">
-                      <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                        <Users className="h-8 w-8 text-white" />
+                <div className="w-full md:mr-12 md:flex-1 md:order-2">
+                  <div className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white rounded-2xl p-6 md:p-8 border border-ara-blue">
+                    <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                      <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300 mx-auto sm:mx-0">
+                        <Users className="h-6 w-6 md:h-8 md:w-8 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-ara-navy mb-4 group-hover:text-ara-teal transition-colors duration-300">
+                      <div className="flex-1 text-center sm:text-left">
+                        <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3 md:mb-4 group-hover:text-ara-teal transition-colors duration-300">
                           Exclusive Network
                         </h3>
-                        <p className="text-gray-700 leading-relaxed text-lg">
+                        <p className="text-gray-700 leading-relaxed text-base md:text-lg">
                           Exclusive network of clinics, hospital systems,
                           patients, and estate-planning attorneys to refine
                           workflows and medicolegal requirements.
                         </p>
-                        <div className="mt-4 flex items-center space-x-2">
+                        <div className="mt-4 flex items-center justify-center sm:justify-start space-x-2">
                           <div className="w-2 h-2 bg-ara-teal rounded-full animate-pulse"></div>
-                          <span className="text-sm text-ara-teal font-medium">
+                          <span className="text-xs md:text-sm text-ara-teal font-medium">
                             Active Partnerships
                           </span>
                         </div>
@@ -125,24 +128,24 @@ export default function WhereWeAreSection() {
             >
               <div className="flex items-center justify-center md:justify-start md:pr-8">
                 {/* Content Card */}
-                <div className="ml-8 md:ml-12 flex-1">
-                  <div className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white rounded-2xl p-8 border border-ara-blue">
-                    <div className="flex items-start space-x-6">
-                      <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                        <Heart className="h-8 w-8 text-white" />
+                <div className="w-full md:ml-12 md:flex-1">
+                  <div className="group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500 border-0 bg-white/80 backdrop-blur-sm hover:bg-white rounded-2xl p-6 md:p-8 border border-ara-blue">
+                    <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                      <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300 mx-auto sm:mx-0">
+                        <Heart className="h-6 w-6 md:h-8 md:w-8 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-ara-navy mb-4 group-hover:text-ara-gold transition-colors duration-300">
+                      <div className="flex-1 text-center sm:text-left">
+                        <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3 md:mb-4 group-hover:text-ara-gold transition-colors duration-300">
                           Design Partners
                         </h3>
-                        <p className="text-gray-700 leading-relaxed text-lg">
+                        <p className="text-gray-700 leading-relaxed text-base md:text-lg">
                           Looking for design-partner hospitals, long-term-care
                           organisations, and patient advocates who want to shape
                           the product from ground up.
                         </p>
-                        <div className="mt-4 flex items-center space-x-2">
+                        <div className="mt-4 flex items-center justify-center sm:justify-start space-x-2">
                           <div className="w-2 h-2 bg-ara-gold rounded-full animate-pulse"></div>
-                          <span className="text-sm text-ara-gold font-medium">
+                          <span className="text-xs md:text-sm text-ara-gold font-medium">
                             Seeking Partners
                           </span>
                         </div>
