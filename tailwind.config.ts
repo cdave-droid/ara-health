@@ -22,6 +22,7 @@ const config: Config = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         "source-sans": ["Source Sans Pro", "sans-serif"],
+        "tt-firs-neue": ["TT Firs Neue Trial", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",

@@ -23,9 +23,9 @@ export default function Footer() {
     <footer className="bg-ara-navy text-white pt-16 md:pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-inter font-bold mb-8 tracking-tight">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-tt-firs-neue font-bold mb-8 tracking-tight">
             <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">
-              ARA HEALTH
+              ara health
             </span>
           </h1>
           <p className="text-lg md:text-xl font-bold text-white max-w-4xl mx-auto leading-relaxed mb-12">

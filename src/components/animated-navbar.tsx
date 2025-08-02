@@ -92,11 +92,11 @@ export function AnimatedNavbar() {
               className="rounded-lg"
             />
             <motion.span
-              className="font-inter font-semibold text-white whitespace-nowrap"
+              className="font-tt-firs-neue font-bold text-white whitespace-nowrap tracking-wide"
               layout
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
-              ARA HEALTH
+              ara health
             </motion.span>
           </motion.div>
 
