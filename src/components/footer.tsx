@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="text-center">
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-tt-firs-neue font-bold mb-8 tracking-tight">
             <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">
-              ara health
+              ARA HEALTH
             </span>
           </h1>
           <p className="text-lg md:text-xl font-bold text-white max-w-4xl mx-auto leading-relaxed mb-12">
