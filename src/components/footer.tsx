@@ -36,7 +36,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="text-center">
             <p className="text-gray-300 text-sm">
-              © {currentYear} Ara Health. All rights reserved.
+              © {currentYear} ara health. All rights reserved.
             </p>
           </div>
         </div>
