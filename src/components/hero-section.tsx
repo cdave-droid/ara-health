@@ -77,7 +77,7 @@ export function HeroSection({}: HeroSectionProps) {
               alt="Ara Health Logo"
               width={96}
               height={96}
-              className="h-12 sm:h-16 md:h-20 lg:h-24 mx-auto rounded-full object-cover"
+              className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto rounded-full object-cover"
             />
           </motion.div>
 
@@ -126,8 +126,6 @@ export function HeroSection({}: HeroSectionProps) {
                 <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </span>
             </button>
-
-
           </motion.div>
         </div>
       </motion.div>

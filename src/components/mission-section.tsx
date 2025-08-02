@@ -33,11 +33,14 @@ export default function MissionSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mission Heading */}
         <motion.div
-          className="text-center mb-16 md:mb-24"
+          className="text-center mb-8 md:mb-16"
           style={{ y: textY, opacity: textOpacity, scale: textScale }}
         >
           <h2 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-inter font-bold text-ara-navy mb-6 md:mb-12 leading-tight">
-            Our <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">Mission</span>
+            Our{" "}
+            <span className="bg-gradient-to-r from-ara-blue via-ara-teal to-ara-blue-light bg-clip-text text-transparent">
+              Mission
+            </span>
           </h2>
         </motion.div>
 
@@ -51,63 +54,28 @@ export default function MissionSection() {
               {/* Decorative elements */}
               <div className="absolute -top-6 -left-6 w-12 h-12 bg-gradient-to-br from-ara-blue/20 to-ara-teal/20 rounded-full blur-xl"></div>
               <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-gradient-to-br from-ara-teal/20 to-ara-blue/20 rounded-full blur-xl"></div>
-              
+
               {/* Main mission card */}
               <div className="relative bg-gradient-to-br from-white via-white to-gray-50/50 rounded-3xl p-8 md:p-16 shadow-2xl border border-gray-200/50 backdrop-blur-sm">
                 <div className="text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-ara-navy to-ara-blue rounded-2xl mb-6 md:mb-8 shadow-lg">
                     <Heart className="h-8 w-8 md:h-10 md:w-10 text-white" />
                   </div>
-                  
+
                   <h3 className="text-2xl md:text-3xl lg:text-4xl font-inter font-bold text-ara-navy mb-6 md:mb-8">
                     To reduce patient suffering as much as possible
                   </h3>
-                  
+
                   <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-medium">
-                    by building a more effective healthcare system..
+                    by building a more compassionate and efficient health care
+                    system
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
-
-        {/* Mission Pillars */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12"
-          style={{ opacity: pillarsOpacity, y: pillarsY }}
-        >
-          {/* Pillar 1 - Reduce Suffering */}
-          <div className="text-center group">
-            <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
-              Reduce Suffering
-            </h3>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-              Minimizing patient pain and distress through better care coordination and decision-making.
-            </p>
-          </div>
-
-          {/* Pillar 2 - Build Effective System */}
-          <div className="text-center group">
-            <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
-              Build Effective System
-            </h3>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-              Creating healthcare infrastructure that works seamlessly for patients and providers.
-            </p>
-          </div>
-
-          {/* Pillar 3 - Prioritize Well-being */}
-          <div className="text-center group">
-            <h3 className="text-xl md:text-2xl font-bold text-ara-navy mb-3">
-              Prioritize Well-being
-            </h3>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-              Ensuring every healthcare decision centers on patient health and quality of life.
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
-} 
+}
