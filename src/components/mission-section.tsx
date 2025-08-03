@@ -62,11 +62,11 @@ export default function MissionSection() {
                     <Heart className="h-8 w-8 md:h-10 md:w-10 text-white" />
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-inter font-bold text-ara-navy mb-6 md:mb-8">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-inter font-bold text-ara-navy mb-6 md:mb-8">
                     To reduce patient suffering as much as possible
                   </h3>
 
-                  <p className="text-2xl md:text-3xl lg:text-4xl font-inter font-bold text-ara-navy mb-6 md:mb-8">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-inter font-bold text-ara-navy mb-6 md:mb-8">
                     by building a more compassionate and efficient health care
                     system
                   </p>
