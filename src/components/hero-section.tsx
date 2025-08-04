@@ -99,7 +99,7 @@ export function HeroSection({}: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
-            We&apos;re building the only patient-first AI platform dedicated
+               Building the only patient-first AI platform dedicated
             towards improving patient experience and outcomes by ensuring
             alignment with patient values across the healthcare ecosystem.
           </motion.p>
